@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # devise_for :users
 
   namespace :v1 do
-    resources :sessions, only: %i[create destroy]
+    post '/sing_in', to: 'sessions#create'
+    delete '/sing_out/:id', to: 'sessions#destroy'
   end
 end
