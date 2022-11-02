@@ -3,10 +3,6 @@ require:
   - rubocop-rails
   - rubocop-performance
 
-AllCops:
-  Exclude:
-    - 'bin/*'
-
 Rails/BulkChangeTable:
   Enabled: false
 
