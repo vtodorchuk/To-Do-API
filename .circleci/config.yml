@@ -64,7 +64,6 @@ commands:
       - run:
           name: specs
           command: |
-            RAILS_ENV=test bin/rake assets:precompile
             bundle exec rspec
       - store_artifacts:
           path: ~/codebreaker/coverage
