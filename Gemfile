@@ -26,6 +26,7 @@ group :development do
 end
 
 group :test do
+  gem 'dox', require: false
   gem 'rspec', '~> 3.12'
   gem 'rspec-rails', '~> 5.1', '>= 5.1.2'
   gem 'simplecov', '~> 0.21.2'
