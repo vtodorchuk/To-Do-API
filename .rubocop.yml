@@ -2,10 +2,10 @@ require:
   - rubocop-rspec
   - rubocop-rails
   - rubocop-performance
+
 AllCops:
   Exclude:
-    - 'db/**/*'
-    - 'bin/{rails,rake}'
+    - 'bin/*'
 
 Rails/BulkChangeTable:
   Enabled: false
