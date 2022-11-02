@@ -4,17 +4,30 @@ module V1
       user = User.find_by(email: params[:email])
 
       if user&.valid_password?(params[:password])
-        render json: user.to_json(only: %i[id authentication_token]), status: :created
+        render json: {
+          data: {
+            user: { id: user.id, authentication_token: user.authentication_token },
+            message: I18n.t('session.sing_in.message.success')
+          }
+        }, status: :created
       else
-        render status: :unauthorized
+        render json: {
+          data: {
+            message: I18n.t('session.sing_in.message.errors.email')
+          }
+        }, status: :unauthorized
       end
     end
 
     def destroy
-      current_user = User.where(id: params[:id], authentication_token: params[:authentication_token])
+      current_user = User.where(id: params[:id], authentication_token: params[:authentication_token]).first
 
       if current_user&.update(authentication_token: nil)
-        render status: :ok
+        render json: {
+          data: {
+            message: I18n.t('session.sign_out.message.success')
+          }
+        }, status: :ok
       else
         render status: :not_found
       end

@@ -1,0 +1,16 @@
+en:
+  session:
+    sing_up:
+      message:
+        success: 'User is already created!'
+        errors:
+          email: 'This email is already taken!'
+          password: 'Confirmation password is different!'
+    sing_in:
+      message:
+        success: 'You are successfully sing in!'
+        errors:
+          email: 'User this this email is not exits!'
+    sign_out:
+      message:
+        success: 'Goodbye, Hope to see you soon!'
