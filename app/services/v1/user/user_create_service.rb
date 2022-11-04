@@ -1,7 +1,5 @@
 module V1
-  class UserCreateService
-    attr_reader :data, :status
-
+  class UserCreateService < V1::Service
     def call(params)
       user = User.new(email: params[:email], password: params[:password])
 
@@ -34,8 +32,7 @@ module V1
     def validate_message(user, params)
       return I18n.t('session.sing_up.message.errors.email') if user_exists?(params[:email])
 
-      I18n.t('session.sing_up.message.errors.password') unless confirmed_password?(user,
-                                                                                   params[:password_confirmation])
+      I18n.t('session.sing_up.message.errors.password') unless confirmed_password?(user, params[:password_confirmation])
     end
 
     def user_exists?(email)

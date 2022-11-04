@@ -1,4 +1,4 @@
-require_relative '../../services/v1/user_create_service'
+require_relative '../../services/v1/user/user_create_service'
 module V1
   class UsersController < ApplicationController
     def create

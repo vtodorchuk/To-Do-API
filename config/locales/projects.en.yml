@@ -1,0 +1,8 @@
+en:
+  projects:
+    messages:
+      success:
+        create: 'You have successfully created the project!'
+        destroy: 'You have successfully deleted the project!'
+      errors:
+        not_found: 'Project is not found!'

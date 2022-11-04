@@ -1,7 +1,5 @@
 module V1
-  class SessionCreateService
-    attr_reader :data, :status
-
+  class SessionCreateService < V1::Service
     def call(params)
       user = User.find_by(email: params[:email])
 
