@@ -29,7 +29,7 @@ module V1
       else
         @data = { data: {
           message: I18n.t('session.sing_up.message.errors.error'),
-          errors: user.error.messages
+          errors: user.errors.messages
         } }
         @status = :unprocessable_entity
       end

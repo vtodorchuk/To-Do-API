@@ -7,9 +7,13 @@ ruby '2.6.10'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise', '~> 4.8', '>= 4.8.1'
+gem 'jwt', '~> 2.2', '>= 2.2.1'
+gem 'jwt_sessions'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.7'
+gem 'redis', '~> 4.1', '>= 4.1.3'
+gem 'redis-rails', '~> 5.0', '>= 5.0.2'
 gem 'simple_token_authentication', '~> 1.17'
 
 group :development, :test do

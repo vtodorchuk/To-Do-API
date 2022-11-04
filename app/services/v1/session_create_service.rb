@@ -7,7 +7,7 @@ module V1
 
       if user&.valid_password?(params[:password])
         @data = { data: {
-          user: { id: user.id, authentication_token: user.authentication_token },
+          user: { id: user.id },
           message: I18n.t('session.sing_in.message.success')
         } }
         @status = :created
