@@ -8,9 +8,7 @@ module V1
       message = validate_message(user, params)
 
       if message
-        @data = { data: {
-          message: message
-        } }
+        @data = { message: message }
         @status = :unprocessable_entity
       else
         create_user(user)
@@ -27,10 +25,8 @@ module V1
         } }
         @status = :created
       else
-        @data = { data: {
-          message: I18n.t('session.sing_up.message.errors.error'),
-          errors: user.errors.messages
-        } }
+        @data = { message: I18n.t('session.sing_up.message.errors.error'),
+                  errors: user.errors.messages }
         @status = :unprocessable_entity
       end
     end

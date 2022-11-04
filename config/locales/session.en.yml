@@ -1,5 +1,6 @@
 en:
   session:
+    auth: 'Authorization'
     sing_up:
       message:
         success: 'You are successfully sing up!. Thanks!'
@@ -15,3 +16,5 @@ en:
     sign_out:
       message:
         success: 'Goodbye, Hope to see you soon!'
+    errors:
+      something_not_right: 'Somethings not right here!'

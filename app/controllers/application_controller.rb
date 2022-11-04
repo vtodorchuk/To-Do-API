@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  include JWTSessions::RailsAuthorization
+  rescue_from JWTSessions::Errors::Unauthorized, with: :not_authorized
+
   private
 
-  def authorized?
-    # TODO: check before action work if user is authorized in application
-    # If he is
-    # Then allow him use action
-    # If he isn't
-    # send 401 status unauthorized
+  def current_user
+    @current_user ||= User.find(payload['user_id'])
+  end
+
+  def not_authorized
+    render json: { error: 'Not authorized' }, status: :unauthorized
   end
 end

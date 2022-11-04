@@ -2,6 +2,7 @@ require_relative '../../services/v1/session_create_service'
 
 module V1
   class SessionsController < ApplicationController
+    before_action :authorize_access_request!, only: [:destroy]
     def create
       session = V1::SessionCreateService.new
       session.call(params)
@@ -10,7 +11,9 @@ module V1
     end
 
     def destroy
-      # TODO: Destroy access_token and refresh for this user
+      session = JWTSessions::Session.new(payload: payload)
+      session.flush_by_access_payload
+      render status: :ok
     end
   end
 end
