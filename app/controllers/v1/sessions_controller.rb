@@ -1,36 +1,16 @@
+require_relative '../../services/v1/session_create_service'
+
 module V1
   class SessionsController < ApplicationController
     def create
-      user = User.find_by(email: params[:email])
+      session = V1::SessionCreateService.new
+      session.call(params)
 
-      if user&.valid_password?(params[:password])
-        render json: {
-          data: {
-            user: { id: user.id, authentication_token: user.authentication_token },
-            message: I18n.t('session.sing_in.message.success')
-          }
-        }, status: :created
-      else
-        render json: {
-          data: {
-            message: I18n.t('session.sing_in.message.errors.email')
-          }
-        }, status: :unauthorized
-      end
+      render json: session.data, status: session.status
     end
 
     def destroy
-      current_user = User.where(id: params[:id], authentication_token: params[:authentication_token]).first
-
-      if current_user&.update(authentication_token: nil)
-        render json: {
-          data: {
-            message: I18n.t('session.sign_out.message.success')
-          }
-        }, status: :ok
-      else
-        render status: :not_found
-      end
+      # TODO: Destroy access_token and refresh for this user
     end
   end
 end

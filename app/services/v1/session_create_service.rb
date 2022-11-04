@@ -7,14 +7,14 @@ module V1
 
       if user&.valid_password?(params[:password])
         @data = { data: {
-            user: { id: user.id, authentication_token: user.authentication_token },
-            message: I18n.t('session.sing_in.message.success')
-          } }
+          user: { id: user.id, authentication_token: user.authentication_token },
+          message: I18n.t('session.sing_in.message.success')
+        } }
         @status = :created
       else
-        @data =  { data: {
-            message: I18n.t('session.sing_in.message.errors.email')
-          } }
+        @data = { data: {
+          message: I18n.t('session.sing_in.message.errors.email')
+        } }
         @status = :unauthorized
       end
     end
