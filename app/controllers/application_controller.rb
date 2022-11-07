@@ -6,11 +6,13 @@ class ApplicationController < ActionController::API
 
   private
 
-  def not_authorized
-    render json: { error: "Not authorized" }, status: :unauthorized
-  end
-
   def current_user
+    # binding.pry
     @current_user ||= User.find(payload['user_id'])
   end
+
+  def not_authorized
+    render json: { error: 'Not authorized' }, status: :unauthorized
+  end
+
 end

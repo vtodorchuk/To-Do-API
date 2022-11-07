@@ -4,10 +4,15 @@ module V1
   class UsersController < ApplicationController
     def create
       user = V1::UsersCreateService.new
-      user.call(params)
+      user.call(permitted_params)
 
       render json: user.data, status: user.status
     end
+  end
+
+  def show
+    user = User.find(params[:id])
+    render json: { current_user: current_user.to_json, user: user.to_json }
   end
 
   private

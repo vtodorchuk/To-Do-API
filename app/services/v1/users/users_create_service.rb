@@ -17,8 +17,12 @@ module V1
 
     def create_user(user)
       if user.save
+        payload = { user_id: user_id }
+        session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
+        tokens = session.login
+
         @data = { data: {
-          user: { id: user.id, email: user.email },
+          user: { access: tokens[:access], csrf: tokens[:csrf] },
           message: I18n.t('session.sing_up.message.success')
         } }
         @status = :created

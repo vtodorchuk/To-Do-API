@@ -1,7 +1,7 @@
 
 module V1
   class ProjectsController < ApplicationController
-    before_action :authorize_access_request!, only: [:destroy]
+    before_action :authorize_access_request!
 
     def create
       project = Project.new(name: params[:name])
@@ -12,7 +12,7 @@ module V1
           } }, status: :create
       else
         render json: {
-          data: { errors: project.errors.messages
+          data: { errors: project.errors.full_messages
           } }, status: :unprocessable_entity
       end
     end
@@ -26,7 +26,7 @@ module V1
           } }, status: :ok
       else
         render json: {
-          data: { errors: project.errors.messages
+          data: { errors: project.errors.full_messages
           } }, status: :unprocessable_entity
       end
     end
@@ -37,6 +37,16 @@ module V1
       return render status: :not_found if project.nil?
 
       render json: { data: { project: project.to_json } }, status: :found
+    end
+
+    def update
+      project = Project.where(id: params[:project_id], user_id: current_user.id)
+
+      if project.update(params)
+        render json: { data: { project: project.to_json } }, status: :ok
+      else
+        render status: :not_found
+      end
     end
   end
 end
