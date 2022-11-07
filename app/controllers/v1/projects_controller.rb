@@ -1,4 +1,3 @@
-
 module V1
   class ProjectsController < ApplicationController
     before_action :authorize_access_request!
@@ -8,12 +7,12 @@ module V1
 
       if project.save
         render json: {
-          data: { user_id: current_user.id, project_id: project.id
-          } }, status: :create
+          data: { user_id: current_user.id, project_id: project.id }
+        }, status: :create
       else
         render json: {
-          data: { errors: project.errors.full_messages
-          } }, status: :unprocessable_entity
+          data: { errors: project.errors.full_messages }
+        }, status: :unprocessable_entity
       end
     end
 
@@ -22,12 +21,12 @@ module V1
 
       if project&.destroy
         render json: {
-          data: { message: I18n.t('project.messages.successful.destroy')
-          } }, status: :ok
+          data: { message: I18n.t('project.messages.successful.destroy') }
+        }, status: :ok
       else
         render json: {
-          data: { errors: project.errors.full_messages
-          } }, status: :unprocessable_entity
+          data: { errors: project.errors.full_messages }
+        }, status: :unprocessable_entity
       end
     end
 

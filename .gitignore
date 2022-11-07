@@ -22,6 +22,7 @@ coverage/*
 !/tmp/pids/
 !/tmp/pids/.keep
 
+dump.rdb
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep

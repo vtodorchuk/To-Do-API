@@ -21,4 +21,3 @@ module V1
     params.permit(%i[email password password_confirmation])
   end
 end
-

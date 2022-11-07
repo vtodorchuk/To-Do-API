@@ -14,5 +14,4 @@ class ApplicationController < ActionController::API
   def not_authorized
     render json: { error: 'Not authorized' }, status: :unauthorized
   end
-
 end
