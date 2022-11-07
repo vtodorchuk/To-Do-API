@@ -1,0 +1,43 @@
+require:
+  - rubocop-rspec
+  - rubocop-rails
+  - rubocop-performance
+
+Rails/BulkChangeTable:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 16
+  Exclude:
+    - 'db/migrate/*'
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+Metrics/BlockLength:
+  Max: 40
+  ExcludedMethods: ['describe']
+
+RSpec/ExampleLength:
+  Max: 30
+
+Metrics/AbcSize:
+  Max: 30
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 9

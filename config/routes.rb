@@ -1,3 +1,11 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :users
+  namespace :v1 do
+    post 'user/sing_in', to: 'sessions#create'
+    post 'user/sing_up', to: 'users#create'
+    delete 'user/sing_out', to: 'sessions#destroy'
+    post 'user/refresh', to: 'refresh#create'
+  end
 end
