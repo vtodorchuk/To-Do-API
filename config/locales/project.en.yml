@@ -1,0 +1,5 @@
+en:
+  project:
+    messages:
+      successful:
+        destroy: 'Project was successfully deleted!'
