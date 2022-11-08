@@ -3,10 +3,9 @@ module V1
     def call(params)
       user = User.new(email: params[:email], password: params[:password])
 
-      message = validate_message(user, params)
-
+      message = validate?(user, params)
       if message
-        @data = { message: message }
+        @data = { data: { errors: message } }
         @status = :unprocessable_entity
       else
         create_user(user)
@@ -17,7 +16,7 @@ module V1
 
     def create_user(user)
       if user.save
-        payload = { user_id: user_id }
+        payload = { user_id: user.id }
         session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
         tokens = session.login
 
@@ -26,17 +25,15 @@ module V1
         } }
         @status = :created
       else
-        @data = { errors: user.errors.messages }
+        @data = { data: { errors: user.errors.messages } }
         @status = :unprocessable_entity
       end
     end
 
-    def validate_message(user, params)
-      return false if user_exists?(params[:email])
+    def validate?(user, params)
+      return I18n.t('session.sing_up.message.errors.email') if user_exists?(params[:email])
 
-      false unless confirmed_password?(user, params[:password_confirmation])
-
-      true
+      I18n.t('session.sing_up.message.errors.password') unless user.valid_password?(params[:password_confirmation])
     end
 
     def user_exists?(email)
@@ -44,10 +41,6 @@ module V1
       return true if user
 
       false
-    end
-
-    def confirmed_password?(user, password_confirmation)
-      user.valid_password?(password_confirmation)
     end
   end
 end
