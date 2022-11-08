@@ -3,4 +3,3 @@ module V1
     attr_accessor :data, :status
   end
 end
-
