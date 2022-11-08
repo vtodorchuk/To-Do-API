@@ -21,11 +21,13 @@ coverage/*
 /tmp/pids/*
 !/tmp/pids/
 !/tmp/pids/.keep
+tmp
 
 dump.rdb
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep
+storage
 
 /public/assets
 .byebug_history
