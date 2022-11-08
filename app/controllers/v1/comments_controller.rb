@@ -8,7 +8,8 @@ module V1
 
       if comments
         render json: {
-          data: { comments: comments.to_json } }, status: :create
+          data: { comments: comments.to_json }
+        }, status: :create
       else
         render status: :not_found
       end
@@ -38,7 +39,7 @@ module V1
       comment = Comment.where(id: params[:comment_id])
 
       if comment
-        render json: { data: comment.to_json },status: :ok
+        render json: { data: comment.to_json }, status: :ok
       else
         render status: :not_found
       end

@@ -8,7 +8,8 @@ module V1
 
       if tasks
         render json: {
-          data: { tasks: tasks.to_json } }, status: :create
+          data: { tasks: tasks.to_json }
+        }, status: :create
       else
         render status: :not_found
       end
@@ -20,10 +21,12 @@ module V1
 
       if task.save
         render json: {
-          data: { task: task.to_json } }, status: :create
+          data: { task: task.to_json }
+        }, status: :create
       else
         render json: {
-          data: { errors: task.errors.full_messages } }, status: :unprocessable_entity
+          data: { errors: task.errors.full_messages }
+        }, status: :unprocessable_entity
       end
     end
 
@@ -34,7 +37,8 @@ module V1
         render status: :ok
       else
         render json: {
-          data: { errors: task.errors.full_messages } }, status: :unprocessable_entity
+          data: { errors: task.errors.full_messages }
+        }, status: :unprocessable_entity
       end
     end
 
@@ -45,7 +49,8 @@ module V1
         render status: :ok
       else
         render json: {
-          data: { errors: task.errors.full_messages } }, status: :unprocessable_entity
+          data: { errors: task.errors.full_messages }
+        }, status: :unprocessable_entity
       end
     end
 
