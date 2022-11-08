@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       post '/refresh', to: 'refresh#create'
     end
 
-    resources :projects, only: %i[create destroy show]
+    resources :projects, only: %i[create destroy show update] do
+      resources :tasks, only: %i[create destroy show update]
+    end
   end
 end

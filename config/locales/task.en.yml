@@ -1,0 +1,6 @@
+en:
+  task:
+    messages:
+      success:
+        destroy: 'Task was successfully deleted!'
+        update: 'Task was successfully updated!'

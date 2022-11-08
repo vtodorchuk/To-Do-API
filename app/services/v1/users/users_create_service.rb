@@ -24,7 +24,7 @@ module V1
         @status = :created
       else
         @data = { message: I18n.t('session.sing_up.message.errors.error'),
-                  errors: user.errors.messages }
+                  errors: user.errors.full_messages }
         @status = :unprocessable_entity
       end
     end

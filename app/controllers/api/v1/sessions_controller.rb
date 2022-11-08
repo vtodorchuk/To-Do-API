@@ -1,4 +1,4 @@
-require_relative '../../services/v1/sessions/sessions_create_service'
+require_relative '../../services/v1/sessions/ns/sessions_create_service'
 
 module V1
   class SessionsController < ApplicationController

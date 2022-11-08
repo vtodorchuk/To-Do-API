@@ -1,7 +1,7 @@
 
 module V1
   class ProjectsController < ApplicationController
-    before_action :authorize_access_request!, only: [:destroy]
+    before_action :authorize_access_request!
 
     def create
       project = Project.new(name: params[:name])
@@ -12,7 +12,7 @@ module V1
           } }, status: :create
       else
         render json: {
-          data: { errors: project.errors.messages
+          data: { errors: project.errors.full_messages
           } }, status: :unprocessable_entity
       end
     end
@@ -26,7 +26,7 @@ module V1
           } }, status: :ok
       else
         render json: {
-          data: { errors: project.errors.messages
+          data: { errors: project.errors.full_messages
           } }, status: :unprocessable_entity
       end
     end
