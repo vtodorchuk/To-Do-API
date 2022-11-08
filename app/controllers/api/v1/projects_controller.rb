@@ -5,7 +5,7 @@ module V1
     def create
       project = Project.new(name: params[:name])
 
-      if project.save
+      if project&.save
         render json: {
           data: { user_id: current_user.id, project_id: project.id }
         }, status: :create
@@ -17,7 +17,7 @@ module V1
     end
 
     def destroy
-      project = Project.where(id: params[:project_id], user_id: current_user.id)
+      project = Project.where(id: params[:project_id], user_id: current_user.id).first
 
       if project&.destroy
         render json: {
@@ -39,9 +39,9 @@ module V1
     end
 
     def update
-      project = Project.where(id: params[:project_id], user_id: current_user.id)
+      project = Project.where(id: params[:project_id], user_id: current_user.id).first
 
-      if project.update(params)
+      if project&.update(params)
         render json: { data: { project: project.to_json } }, status: :ok
       else
         render status: :not_found
