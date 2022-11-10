@@ -7,7 +7,7 @@ class Api::V1::TasksController < ApplicationController
 
     if @tasks
       render json: { data: { tasks: @tasks.to_json } }, status: :found
-      w    else
+    else
       render status: :not_found
     end
   end
