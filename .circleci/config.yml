@@ -5,6 +5,7 @@ executors:
     working_directory: ~/codebreaker
     description: The official CircleCI Ruby Docker image
     docker:
+      - image: cimg/redis:6.2.6
       - image: cimg/ruby:2.6.10
         environment:
           RAILS_ENV: test
