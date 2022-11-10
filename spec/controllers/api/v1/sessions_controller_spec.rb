@@ -13,7 +13,7 @@ describe Api::V1::SessionsController do
 
       it 'has return json with tokens' do
         expect(JSON.parse(response.body)['data'].keys.sort).to eq %w[access access_expires_at csrf refresh
-                                                                  refresh_expires_at]
+                                                                     refresh_expires_at]
       end
     end
 
