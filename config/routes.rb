@@ -6,7 +6,11 @@ Rails.application.routes.draw do
 
       resource :session, only: %i[create destroy]
 
-      resources :projects
+      resources :projects do
+        resources :tasks do
+          resources :comments
+        end
+      end
     end
   end
 end
