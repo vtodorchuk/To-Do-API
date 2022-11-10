@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  namespace :v1 do
-    post 'user/sing_in', to: 'sessions#create'
-    post 'user/sing_up', to: 'users#create'
-    delete 'user/sing_out', to: 'sessions#destroy'
-    post 'user/refresh', to: 'refresh#create'
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: %i[create destroy]
+      resources :refresh, only: :create
+      resources :sessions, only: %i[create destroy]
+    end
   end
 end

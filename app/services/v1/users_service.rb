@@ -1,3 +1,5 @@
+require_relative '../v1/service'
+
 module V1
   class UsersService < V1::Service
     def call(params)
