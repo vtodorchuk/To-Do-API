@@ -6,12 +6,6 @@ class Api::V1::ProjectsController < ApplicationController
     render json: V1::ProjectSerializer.new(result[:projects]), status: :found
   end
 
-  def index
-    projects = Project.where(id: params[:project_id], user_id: current_user.id)
-
-    render json: { data: { projects: projects.to_json } }, status: :found
-  end
-
   def create
     result = V1::Project::Operation::Create.call(current_user: current_user, params: params)
 
