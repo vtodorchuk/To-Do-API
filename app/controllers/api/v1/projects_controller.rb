@@ -11,7 +11,7 @@ class Api::V1::ProjectsController < ApplicationController
     project = Project.new(name: params[:name])
 
     if project&.save
-      render json: { data: { user_id: current_user.id, project_id: project.id } }, status: :create
+      render json: { data: { user_id: current_user.id, project_id: project.id } }, status: :created
     else
       render json: { data: { errors: project.errors.full_messages } }, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class Api::V1::ProjectsController < ApplicationController
     if project&.destroy
       render status: :ok
     else
-      render json: { data: { errors: project.errors.full_messages } }, status: :unprocessable_entity
+      render status: :not_found
     end
   end
 
