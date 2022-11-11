@@ -5,10 +5,10 @@ describe Api::V1::ProjectsController do
   let(:old_name) { project.name }
   let(:new_name) { FFaker::Lorem.word }
 
-  before do
+  let(:access_token) do
     payload = { user_id: user.id }
     session = JWTSessions::Session.new(payload: payload)
-    let(:access_token) { "Bearer #{session.login[:access]}" }
+    "Bearer #{session.login[:access]}"
   end
 
   describe 'GET #index' do
@@ -70,7 +70,7 @@ describe Api::V1::ProjectsController do
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :show
+        get :show, params: { id: rand(0..10) }
       end
 
       it do
@@ -139,7 +139,7 @@ describe Api::V1::ProjectsController do
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        put :update
+        put :update, params: { id: project.id }
       end
 
       it do
@@ -168,7 +168,7 @@ describe Api::V1::ProjectsController do
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :destroy
+        get :destroy, params: { id: rand(0..10) }
       end
 
       it do

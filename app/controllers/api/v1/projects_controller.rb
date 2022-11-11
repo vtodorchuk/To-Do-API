@@ -2,7 +2,7 @@ class Api::V1::ProjectsController < ApplicationController
   before_action :authorize_access_request!
 
   def index
-    projects = Project.where(id: params[:project_id], user_id: current_user.id)
+    projects = Project.where(id: params[:id], user_id: current_user.id)
 
     render json: { data: { projects: projects.to_json } }, status: :found
   end
@@ -11,14 +11,14 @@ class Api::V1::ProjectsController < ApplicationController
     project = Project.new(name: params[:name])
 
     if project&.save
-      render json: { data: { user_id: current_user.id, project_id: project.id } }, status: :created
+      render json: { data: { project: project.to_json } }, status: :created
     else
       render json: { data: { errors: project.errors.full_messages } }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    project = Project.where(id: params[:project_id], user_id: current_user.id).first
+    project = Project.where(id: params[:id], user_id: current_user.id).first
 
     if project&.destroy
       render status: :ok
@@ -28,7 +28,7 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def show
-    project = Project.where(id: params[:project_id], user_id: current_user.id)
+    project = Project.where(id: params[:id], user_id: current_user.id)
 
     return render status: :not_found unless project
 
@@ -36,7 +36,7 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def update
-    project = Project.where(id: params[:project_id], user_id: current_user.id).first
+    project = Project.where(id: params[:id], user_id: current_user.id).first
 
     if project&.update(params)
       render json: { data: { project: project.to_json } }, status: :ok
