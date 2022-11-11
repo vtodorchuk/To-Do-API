@@ -1,7 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :project
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many_attached :files
 
   validates :deadline_is_possible?

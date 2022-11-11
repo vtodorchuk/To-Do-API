@@ -6,9 +6,7 @@ class Api::V1::TasksController < ApplicationController
     tasks = project.tasks
 
     if tasks
-      render json: {
-        data: { tasks: tasks.to_json }
-      }, status: :found
+      render json: { data: { tasks: tasks.to_json } }, status: :found
     else
       render status: :not_found
     end
@@ -19,45 +17,37 @@ class Api::V1::TasksController < ApplicationController
     task = project.tasks.new(params)
 
     if task.save
-      render json: {
-        data: { task: task.to_json }
-      }, status: :created
+      render json: { data: { task: task.to_json } }, status: :created
     else
-      render json: {
-        data: { errors: task.errors.full_messages }
-      }, status: :unprocessable_entity
+      render json: { data: { errors: task.errors.full_messages } }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    task = Task.where(id: params[:task_id]).first
+    task = Task.where(id: params[:id]).first
 
     if task&.destroy
       render status: :ok
     else
-      render json: {
-        data: { errors: task.errors.full_messages }
-      }, status: :unprocessable_entity
+      render json: { data: { errors: task.errors.full_messages } }, status: :unprocessable_entity
     end
   end
 
   def update
-    task = Task.where(id: params[:task_id]).first
+    task = Task.where(id: params[:id]).first
 
     if task&.update(params[:task])
       render status: :ok
     else
-      render json: {
-        data: { errors: task.errors.full_messages }
-      }, status: :unprocessable_entity
+      render json: { data: { errors: task.errors.full_messages } }, status: :unprocessable_entity
     end
   end
 
   def show
-    task = Task.where(id: params[:task_id]).first
+    task = Task.where(id: params[:id]).first
 
     return render status: :not_found if task.nil?
 
-    render json: { data: { project: task.to_json } }, status: :found
+    render json: { data: { task: task.to_json } }, status: :found
   end
 end
