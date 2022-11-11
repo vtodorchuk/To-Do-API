@@ -1,17 +1,19 @@
 class Api::V1::ProjectsController < ApplicationController
   before_action :authorize_access_request!
 
+  def index
+    projects = Project.where(id: params[:project_id], user_id: current_user.id)
+
+    render json: { data: { projects: projects.to_json } }, status: :found
+  end
+
   def create
     project = Project.new(name: params[:name])
 
     if project&.save
-      render json: {
-        data: { user_id: current_user.id, project_id: project.id }
-      }, status: :create
+      render json: { data: { user_id: current_user.id, project_id: project.id } }, status: :create
     else
-      render json: {
-        data: { errors: project.errors.full_messages }
-      }, status: :unprocessable_entity
+      render json: { data: { errors: project.errors.full_messages } }, status: :unprocessable_entity
     end
   end
 
@@ -21,16 +23,14 @@ class Api::V1::ProjectsController < ApplicationController
     if project&.destroy
       render status: :ok
     else
-      render json: {
-        data: { errors: project.errors.full_messages }
-      }, status: :unprocessable_entity
+      render json: { data: { errors: project.errors.full_messages } }, status: :unprocessable_entity
     end
   end
 
   def show
     project = Project.where(id: params[:project_id], user_id: current_user.id)
 
-    return render status: :not_found if project.nil?
+    return render status: :not_found unless project
 
     render json: { data: { project: project.to_json } }, status: :found
   end
