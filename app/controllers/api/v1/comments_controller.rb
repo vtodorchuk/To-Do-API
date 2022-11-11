@@ -8,7 +8,7 @@ class Api::V1::CommentsController < ApplicationController
     if comments
       render json: {
         data: { comments: comments.to_json }
-      }, status: :create
+      }, status: :created
     else
       render status: :not_found
     end

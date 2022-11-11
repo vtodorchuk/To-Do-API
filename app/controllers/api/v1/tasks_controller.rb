@@ -2,26 +2,26 @@ class Api::V1::TasksController < ApplicationController
   before_action :authorize_access_request!
 
   def index
-    project = current_user.projects(params[:project_id])
+    project = current_user.projects.find(params[:project_id])
     tasks = project.tasks
 
     if tasks
       render json: {
         data: { tasks: tasks.to_json }
-      }, status: :create
+      }, status: :found
     else
       render status: :not_found
     end
   end
 
   def create
-    project = current_user.projects(params[:project_id])
+    project = current_user.projects.find(params[:project_id])
     task = project.tasks.new(params)
 
     if task.save
       render json: {
         data: { task: task.to_json }
-      }, status: :create
+      }, status: :created
     else
       render json: {
         data: { errors: task.errors.full_messages }
