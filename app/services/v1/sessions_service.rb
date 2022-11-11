@@ -9,7 +9,7 @@ module V1
         payload = { user_id: user.id }
         session = JWTSessions::Session.new(payload: payload)
 
-        @data = { data: session.login }
+        @data = { data: { user_id: user.id, session: session.login } }
         @status = :created
       else
         @status = :unauthorized

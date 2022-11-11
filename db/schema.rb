@@ -15,33 +15,6 @@ ActiveRecord::Schema.define(version: 2022_11_08_152837) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "comments", force: :cascade do |t|
-    t.bigint "task_id", null: false
-    t.text "body"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["task_id"], name: "index_comments_on_task_id"
-  end
-
-  create_table "projects", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_projects_on_user_id"
-  end
-
-  create_table "tasks", force: :cascade do |t|
-    t.bigint "project_id", null: false
-    t.string "title"
-    t.text "body"
-    t.boolean "completed"
-    t.date "deadline"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_tasks_on_project_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -53,8 +26,4 @@ ActiveRecord::Schema.define(version: 2022_11_08_152837) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_foreign_key "comments", "tasks"
-  add_foreign_key "projects", "users"
-  add_foreign_key "tasks", "projects"
 end
