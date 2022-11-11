@@ -70,7 +70,7 @@ describe Api::V1::ProjectsController do
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :show, params: { id: rand(0..5) }
+        get :show
       end
 
       it do
@@ -168,7 +168,7 @@ describe Api::V1::ProjectsController do
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :destroy, params: { id: project.id }
+        get :destroy
       end
 
       it do
