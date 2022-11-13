@@ -8,8 +8,6 @@ require 'dox'
 require_relative 'support/configs/should_matcher'
 require_relative 'support/configs/dox'
 
-require_relative 'support/configs/should_matcher'
-
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
