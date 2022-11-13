@@ -1,7 +1,7 @@
 class Project < ApplicationRecord
-  MAX_TEXT_SIZE = 80
+  MAX_TEXT_LENGTH = 80
 
   belongs_to :user
 
-  validates :name, presence: true, length: { maximum: MAX_TEXT_SIZE }
+  validates :name, presence: true, length: { maximum: MAX_TEXT_LENGTH }
 end
