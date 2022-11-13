@@ -3,10 +3,10 @@ class Api::V1::TasksController < ApplicationController
 
   def index
     project = current_user.projects.find(params[:project_id])
-    @tasks = project.tasks
+    @tasks = project&.tasks
 
     if @tasks
-      render json: { data: { tasks: @tasks.to_json } }, status: :found
+      render :index, status: :found
     else
       render status: :not_found
     end
@@ -14,12 +14,12 @@ class Api::V1::TasksController < ApplicationController
 
   def create
     project = current_user.projects.find(params[:project_id])
-    @task = project.tasks.new(params)
+    @task = project&.tasks&.new(params)
 
     if @task.save
-      render json: { data: { task: @task.to_json } }, status: :created
+      render :create, status: :created
     else
-      render json: { data: { errors: @task.errors.full_messages } }, status: :unprocessable_entity
+      render :errors, status: :unprocessable_entity
     end
   end
 
@@ -29,7 +29,7 @@ class Api::V1::TasksController < ApplicationController
     if @task&.destroy
       render status: :ok
     else
-      render json: { data: { errors: @task.errors.full_messages } }, status: :unprocessable_entity
+      render :errors, status: :unprocessable_entity
     end
   end
 
@@ -39,7 +39,7 @@ class Api::V1::TasksController < ApplicationController
     if task&.update(params[:task])
       render status: :ok
     else
-      render json: { data: { errors: @task.errors.full_messages } }, status: :unprocessable_entity
+      render :errors, status: :unprocessable_entity
     end
   end
 
@@ -48,6 +48,6 @@ class Api::V1::TasksController < ApplicationController
 
     return render status: :not_found if @task.nil?
 
-    render json: { data: { task: @task.to_json } }, status: :found
+    render :show, status: :found
   end
 end
