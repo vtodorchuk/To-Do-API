@@ -16,7 +16,7 @@ describe Api::V1::UsersController do
       end
 
       it 'has return json with tokens' do
-        expect(JSON.parse(response.body)['data']['user'].keys).to eq %w[access csrf]
+        expect(JSON.parse(response.body)['user'].keys).to eq %w[access csrf]
       end
     end
   end

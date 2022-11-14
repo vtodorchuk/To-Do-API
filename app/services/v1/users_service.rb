@@ -7,7 +7,7 @@ module V1
 
       message = validate?(user, params)
       if message
-        @data = { data: { errors: message } }
+        @data = { errors: message }
         @status = :unprocessable_entity
       else
         create_user(user)
@@ -22,12 +22,10 @@ module V1
         session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
         tokens = session.login
 
-        @data = { data: {
-          user: { access: tokens[:access], csrf: tokens[:csrf] }
-        } }
+        @data = { user: { access: tokens[:access], csrf: tokens[:csrf] } }
         @status = :created
       else
-        @data = { data: { errors: user.errors.messages } }
+        @data = { errors: user.errors.messages }
         @status = :unprocessable_entity
       end
     end
