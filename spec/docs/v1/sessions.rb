@@ -13,16 +13,20 @@ module Docs
         end
       end
 
-      action :create do
-        path '/sing_in'
-        verb 'POST'
-        desc 'Sing in'
+      document :create do
+        action 'Get sessions tokens' do
+          path '/sing_in'
+          verb 'POST'
+          desc 'Sing in'
+        end
       end
 
-      action :destroy do
-        path '/sing_out'
-        verb 'DELETE'
-        desc 'Sing out'
+      document :destroy do
+        action 'Delete sessions tokens' do
+          path '/sing_out'
+          verb 'DELETE'
+          desc 'Sing out'
+        end
       end
     end
   end
