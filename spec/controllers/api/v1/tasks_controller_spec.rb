@@ -1,4 +1,5 @@
-describe Api::V1::TasksController do
+describe Api::V1::TasksController, api: true, type: :controller do
+  include Docs::V1::Tasks::Api
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
   let(:task) { create(:task, project: project) }
@@ -14,6 +15,7 @@ describe Api::V1::TasksController do
 
   describe 'GET #index' do
     context 'when success' do
+      include Docs::V1::Tasks::Index
       before do
         request.headers[JWTSessions.access_header] = access_token
         get :index, params: { project_id: project.id }
@@ -52,6 +54,7 @@ describe Api::V1::TasksController do
 
   describe 'GET #show' do
     context 'when success' do
+      include Docs::V1::Tasks::Show
       before do
         request.headers[JWTSessions.access_header] = access_token
         get :show, params: { project_id: project.id, id: task.id }
@@ -90,6 +93,7 @@ describe Api::V1::TasksController do
 
   describe 'POST #create' do
     context 'when success' do
+      include Docs::V1::Tasks::Create
       before do
         request.headers[JWTSessions.access_header] = access_token
         get :create, params: { project_id: project.id, title: new_title }
@@ -127,6 +131,7 @@ describe Api::V1::TasksController do
   end
 
   describe 'PUT #update' do
+    include Docs::V1::Tasks::Update
     context 'when success' do
       before do
         request.headers[JWTSessions.access_header] = access_token
@@ -165,14 +170,16 @@ describe Api::V1::TasksController do
   end
 
   describe 'DELETE #destroy' do
+    include Docs::V1::Tasks::Destroy
     context 'when success' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :destroy, params: { project_id: project.id, id: task.id }
       end
 
       it do
-        expect(response).to have_http_status(:ok)
+        expect do
+          get :destroy, params: { project_id: task.project.id, task_id: task.id, id: comment.id }
+        end.to change(Task, :count).by(-1)
       end
     end
 

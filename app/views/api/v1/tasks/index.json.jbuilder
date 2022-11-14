@@ -1,7 +1,7 @@
 json.data do
   json.tasks do
     json.call(
-      @tasks,
+      @tasks.order(:position),
       :id,
       :title,
       :completed,

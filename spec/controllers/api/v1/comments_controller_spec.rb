@@ -1,4 +1,5 @@
-describe Api::V1::CommentsController do
+describe Api::V1::CommentsController, api: true, type: :controller do
+  include Docs::V1::Comments::Api
   let(:user) { create(:user) }
   let(:task) { create(:task) }
   let(:comment) { create(:comment, task: task) }
@@ -13,6 +14,7 @@ describe Api::V1::CommentsController do
 
   describe 'GET #index' do
     context 'when success' do
+      include Docs::V1::Comments::Index
       before do
         comment
         request.headers[JWTSessions.access_header] = access_token
@@ -50,6 +52,7 @@ describe Api::V1::CommentsController do
 
   describe 'GET #show' do
     context 'when success' do
+      include Docs::V1::Comments::Show
       before do
         request.headers[JWTSessions.access_header] = access_token
         get :show, params: { project_id: task.project.id, task_id: task.id, id: comment.id }
@@ -86,6 +89,7 @@ describe Api::V1::CommentsController do
 
   describe 'POST #create' do
     context 'when success' do
+      include Docs::V1::Comments::Create
       before do
         request.headers[JWTSessions.access_header] = access_token
         get :create, params: { project_id: task.project.id, task_id: task.id, body: new_body }
@@ -122,6 +126,7 @@ describe Api::V1::CommentsController do
 
   describe 'PUT #update' do
     context 'when success' do
+      include Docs::V1::Comments::Update
       before do
         request.headers[JWTSessions.access_header] = access_token
         put :update, params: { project_id: task.project.id, task_id: task.id, id: comment.id, body: new_body }
@@ -158,13 +163,15 @@ describe Api::V1::CommentsController do
 
   describe 'DELETE #destroy' do
     context 'when success' do
+      include Docs::V1::Comments::Destroy
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :destroy, params: { project_id: task.project.id, task_id: task.id, id: comment.id }
       end
 
       it do
-        expect(response).to have_http_status(:ok)
+        expect do
+          get :destroy, params: { project_id: task.project.id, task_id: task.id, id: comment.id }
+        end.to change(Comment, :count).by(-1)
       end
     end
 
