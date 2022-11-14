@@ -18,7 +18,6 @@ gem 'trailblazer-rails'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'dox', require: false
   gem 'factory_bot_rails', '~> 6.2'
   gem 'fasterer', '~> 0.10.0'
   gem 'ffaker', '~> 2.21'
@@ -34,6 +33,7 @@ group :development do
 end
 
 group :test do
+  gem 'dox', require: false
   gem 'rspec', '~> 3.12'
   gem 'rspec-rails', '~> 5.1', '>= 5.1.2'
   gem 'shoulda-matchers', '~> 5.0'

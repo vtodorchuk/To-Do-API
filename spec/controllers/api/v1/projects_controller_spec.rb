@@ -1,4 +1,5 @@
 describe Api::V1::ProjectsController do
+  include Docs::V1::Projects::Api
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
 
@@ -13,6 +14,7 @@ describe Api::V1::ProjectsController do
 
   describe 'GET #index' do
     context 'when success' do
+      include Docs::V1::Projects::Index
       before do
         project
         request.headers[JWTSessions.access_header] = access_token
@@ -49,6 +51,7 @@ describe Api::V1::ProjectsController do
 
   describe 'GET #show' do
     context 'when success' do
+      include Docs::V1::Projects::Show
       before do
         project
         request.headers[JWTSessions.access_header] = access_token
@@ -85,6 +88,7 @@ describe Api::V1::ProjectsController do
 
   describe 'POST #create' do
     context 'when success' do
+      include Docs::V1::Projects::Create
       before do
         request.headers[JWTSessions.access_header] = access_token
         get :create, params: { name: new_name }
@@ -118,6 +122,7 @@ describe Api::V1::ProjectsController do
 
   describe 'PUT #update' do
     context 'when success' do
+      include Docs::V1::Projects::Update
       before do
         project
         request.headers[JWTSessions.access_header] = access_token
@@ -154,6 +159,7 @@ describe Api::V1::ProjectsController do
 
   describe 'DELETE #destroy' do
     context 'when success' do
+      include Docs::V1::Projects::Destroy
       before do
         project
         request.headers[JWTSessions.access_header] = access_token
