@@ -1,8 +1,10 @@
 describe Api::V1::UsersController do
+  include Docs::V1::Users::Api
   let(:user) { create(:user) }
 
-  describe 'POST v1/users/sing_up' do
+  describe 'POST create' do
     context 'when success' do
+      include Docs::V1::Sessions::Create
       before do
         post :create, params: { email: FFaker::Internet.email,
                                 password: 'password',
