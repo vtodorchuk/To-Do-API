@@ -13,10 +13,12 @@ module Docs
         end
       end
 
-      action :create do
-        path '/sing_up'
-        verb 'POST'
-        desc 'Sing up'
+      document :create do
+        action 'Get User' do
+          path '/sing_up'
+          verb 'POST'
+          desc 'Sing up'
+        end
       end
     end
   end
