@@ -34,7 +34,6 @@ end
 
 group :test do
   gem 'dox', require: false
-  gem 'json-schema'
   gem 'rspec', '~> 3.12'
   gem 'rspec-rails', '~> 5.1', '>= 5.1.2'
   gem 'shoulda-matchers', '~> 5.0'
