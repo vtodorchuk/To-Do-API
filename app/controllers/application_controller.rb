@@ -7,7 +7,6 @@ class ApplicationController < ActionController::API
   private
 
   def current_user
-    # binding.pry
     @current_user ||= User.find(payload['user_id'])
   end
 

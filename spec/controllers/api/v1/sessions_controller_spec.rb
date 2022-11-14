@@ -1,4 +1,4 @@
-describe Api::V1::SessionsController do
+describe Api::V1::SessionsController, type: :controller do
   include Docs::V1::Sessions::Api
   let(:user) { create(:user) }
 
@@ -38,15 +38,20 @@ describe Api::V1::SessionsController do
     context 'when success' do
       include Docs::V1::Sessions::Destroy
       before do
-        delete :destroy, params: { email: user.email, password: user.password }
+        payload = { user_id: user.id }
+        session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
+        tokens = session.login
+        request.headers[JWTSessions.access_header] = "Bearer #{tokens[:access]}"
+        request.headers[JWTSessions.csrf_header] = tokens[:csrf]
+        delete :destroy
       end
 
       it 'has status success' do
-        expect(response).to be_successful
+        expect(response).to have_http_status(:ok)
       end
 
       it 'has return json with tokens' do
-        expect(JSON.parse(response.body)).to be_nil
+        expect(response.body).to eq(' ')
       end
     end
   end

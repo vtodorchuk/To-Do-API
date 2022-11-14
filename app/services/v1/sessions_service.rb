@@ -7,7 +7,7 @@ module V1
 
       if user&.valid_password?(params[:password])
         payload = { user_id: user.id }
-        session = JWTSessions::Session.new(payload: payload)
+        session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
 
         @data = { data: { user_id: user.id, session: session.login } }
         @status = :created
