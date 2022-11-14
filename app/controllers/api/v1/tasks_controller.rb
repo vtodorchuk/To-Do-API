@@ -6,7 +6,7 @@ class Api::V1::TasksController < ApplicationController
     @tasks = project&.tasks
 
     if @tasks
-      render :index, status: :found
+      render json: @tasks.to_json(only: %i[id title deadline position completed project_id]), status: :found
     else
       render status: :not_found
     end
@@ -14,12 +14,12 @@ class Api::V1::TasksController < ApplicationController
 
   def create
     project = current_user.projects.find(params[:project_id])
-    @task = project&.tasks&.new(params)
+    @task = project&.tasks&.new(task_params)
 
     if @task.save
-      render :create, status: :created
+      render json: @task.to_json(only: %i[id title deadline position completed project_id]), status: :created
     else
-      render :errors, status: :unprocessable_entity
+      render json: { errors: @task.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -29,17 +29,17 @@ class Api::V1::TasksController < ApplicationController
     if @task&.destroy
       render status: :ok
     else
-      render :errors, status: :unprocessable_entity
+      render json: { errors: @task.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def update
     @task = Task.where(id: params[:id]).first
 
-    if task&.update(params[:task])
-      render status: :ok
+    if @task&.update(task_params)
+      render json: @task.to_json(only: %i[id title deadline position completed project_id]), status: :ok
     else
-      render :errors, status: :unprocessable_entity
+      render json: { errors: @task.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -48,6 +48,12 @@ class Api::V1::TasksController < ApplicationController
 
     return render status: :not_found if @task.nil?
 
-    render :show, status: :found
+    render json: @task.to_json(only: %i[id title deadline position completed project_id]), status: :found
+  end
+
+  private
+
+  def task_params
+    params.permit(:title, :position, :deadline, :completed)
   end
 end

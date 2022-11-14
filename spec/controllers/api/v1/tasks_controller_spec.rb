@@ -17,6 +17,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
     context 'when success' do
       include Docs::V1::Tasks::Index
       before do
+        task
         request.headers[JWTSessions.access_header] = access_token
         get :index, params: { project_id: project.id }
       end
@@ -26,13 +27,12 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)['data']['tasks']).to eq([{ id: task.id,
-                                                                    project_id: task.project.id,
-                                                                    title: task.title,
-                                                                    completed: task.completed,
-                                                                    deadline: task.deadline,
-                                                                    created_at: task.created_at,
-                                                                    updated_at: task.updated_at }])
+        expect(JSON.parse(response.body)).to eq([{ id: task.id,
+                                                   project_id: task.project.id,
+                                                   title: task.title,
+                                                   completed: task.completed,
+                                                   deadline: task.deadline
+                                                 }])
       end
     end
 
@@ -65,13 +65,11 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)['data']['task']).to eq({ id: task.id,
+        expect(JSON.parse(response.body)).to eq({ id: task.id,
                                                                   project_id: task.project.id,
                                                                   title: task.title,
                                                                   completed: task.completed,
-                                                                  deadline: task.deadline,
-                                                                  created_at: task.created_at,
-                                                                  updated_at: task.updated_at })
+                                                                  deadline: task.deadline })
       end
     end
 
@@ -125,7 +123,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)['data']['errors']).to eq(['Project must exist'])
+        expect(JSON.parse(response.body)).to eq(['Project must exist'])
       end
     end
   end
@@ -143,13 +141,11 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)['data']['task']).to eq({ id: task.id,
+        expect(JSON.parse(response.body)).to eq({ id: task.id,
                                                                   project_id: task.project.id,
                                                                   title: new_title,
                                                                   completed: task.completed,
-                                                                  deadline: task.deadline,
-                                                                  created_at: task.created_at,
-                                                                  updated_at: task.updated_at })
+                                                                  deadline: task.deadline })
       end
     end
 
@@ -164,7 +160,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)['data']['errors']).to eq(["Name can't be blank"])
+        expect(JSON.parse(response.body)).to eq(["Name can't be blank"])
       end
     end
   end

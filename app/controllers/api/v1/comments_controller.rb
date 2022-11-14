@@ -6,7 +6,7 @@ class Api::V1::CommentsController < ApplicationController
     @comments = task&.comments
 
     if @comments
-      render :index, status: :created
+      render json: @comments.to_json(only: %i[id body task_id]), status: :created
     else
       render status: :not_found
     end
@@ -16,7 +16,7 @@ class Api::V1::CommentsController < ApplicationController
     @comment = Comment.new(params)
 
     if @comment&.save
-      render :create, status: :created
+      render json: @comment.to_json(only: %i[id body task_id]), status: :created
     else
       render status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class Api::V1::CommentsController < ApplicationController
     @comment = Comment.where(id: params[:comment_id]).first
 
     if @comment
-      render :show, status: :ok
+      render json: @comment.to_json(only: %i[id body task_id]), status: :ok
     else
       render status: :not_found
     end
