@@ -2,7 +2,7 @@ class Api::V1::CommentsController < ApplicationController
   before_action :authorize_access_request!
 
   def index
-    @comments = task&.comments
+    @comments = task&.comments&.order(created_at: :desc)
 
     if @comments
       render json: @comments.to_json(only: %i[id body task_id]), status: :found

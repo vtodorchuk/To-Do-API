@@ -2,7 +2,7 @@ class Api::V1::TasksController < ApplicationController
   before_action :authorize_access_request!
 
   def index
-    @tasks = project&.tasks
+    @tasks = project&.tasks&.order(position: :desc)
 
     if @tasks
       render json: @tasks.to_json(only: %i[id title deadline position completed project_id]), status: :found
