@@ -3,8 +3,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
   let(:user) { create(:user) }
   let(:task) { create(:task) }
   let(:comment) { create(:comment, task: task) }
-
-  let(:new_body) { FFaker::Lorem.word }
+  let(:comment_attributes) { attributes_for(:comment) }
 
   let(:access_token) do
     payload = { user_id: user.id }
@@ -16,9 +15,9 @@ describe Api::V1::CommentsController, api: true, type: :controller do
     context 'when success' do
       include Docs::V1::Comments::Index
       before do
-        comment
+        task
         request.headers[JWTSessions.access_header] = access_token
-        get :index, params: { project_id: task.project.id }
+        get :index, params: { project_id: task.project.id, task_id: task.id }
       end
 
       it do
@@ -26,26 +25,18 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)['data']['comments']).to eq([{ id: comment.id,
-                                                                       task_id: comment.task.id,
-                                                                       body: comment.title,
-                                                                       created_at: comment.created_at,
-                                                                       updated_at: comment.updated_at }])
+        expect(response).to match_response_schema('comments')
       end
     end
 
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :index, params: { project_id: rand(0...10) }
+        get :index, params: { project_id: task.project.id, task_id: rand(0..10) }
       end
 
       it do
-        expect(response).to have_http_status(:found)
-      end
-
-      it do
-        expect(JSON.parse(response.body)).to be_empty
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
@@ -63,11 +54,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)['data']['comment']).to eq({ id: comment.id,
-                                                                     task_id: comment.task.id,
-                                                                     body: comment.title,
-                                                                     created_at: comment.created_at,
-                                                                     updated_at: comment.updated_at })
+        expect(response).to match_response_schema('comment')
       end
     end
 
@@ -80,10 +67,6 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       it do
         expect(response).to have_http_status(:not_found)
       end
-
-      it do
-        expect(JSON.parse(response.body)).to be_nil
-      end
     end
   end
 
@@ -92,7 +75,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       include Docs::V1::Comments::Create
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :create, params: { project_id: task.project.id, task_id: task.id, body: new_body }
+        get :create, params: { project_id: task.project.id, task_id: task.id, body: comment_attributes[:body] }
       end
 
       it do
@@ -100,18 +83,16 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)['data']['comment']).to eq({ id: comment.id,
-                                                                     task_id: comment.task.id,
-                                                                     body: new_body,
-                                                                     created_at: comment.created_at,
-                                                                     updated_at: comment.updated_at })
+        expect(response).to match_response_schema('comment')
       end
     end
 
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :create, params: { project_id: task.project.id }
+        get :create, params: { project_id: task.project.id,
+                               task_id: task.id,
+                               body: 'a' * Comment::MAX_BODY_LENGTH.next }
       end
 
       it do
@@ -119,66 +100,30 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)['data']['errors']).to eq(['Task must exist'])
-      end
-    end
-  end
-
-  describe 'PUT #update' do
-    context 'when success' do
-      include Docs::V1::Comments::Update
-      before do
-        request.headers[JWTSessions.access_header] = access_token
-        put :update, params: { project_id: task.project.id, task_id: task.id, id: comment.id, body: new_body }
-      end
-
-      it do
-        expect(response).to have_http_status(:ok)
-      end
-
-      it do
-        expect(JSON.parse(response.body)['data']['comment']).to eq({ id: comment.id,
-                                                                     task_id: comment.task.id,
-                                                                     body: new_body,
-                                                                     created_at: comment.created_at,
-                                                                     updated_at: comment.updated_at })
-      end
-    end
-
-    context 'when failure' do
-      before do
-        request.headers[JWTSessions.access_header] = access_token
-        put :update, params: { project_id: task.project.id, task_id: task.id, id: comment.id }
-      end
-
-      it do
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-
-      it do
-        expect(JSON.parse(response.body)['data']['errors']).to eq(["Body can't be blank"])
+        expect(response).to match_response_schema('errors')
       end
     end
   end
 
   describe 'DELETE #destroy' do
+    include Docs::V1::Comments::Destroy
     context 'when success' do
-      include Docs::V1::Comments::Destroy
       before do
+        comment
         request.headers[JWTSessions.access_header] = access_token
       end
 
       it do
         expect do
-          get :destroy, params: { project_id: task.project.id, task_id: task.id, id: comment.id }
-        end.to change(Comment, :count).by(-1)
+          delete :destroy, params: { project_id: task.project.id, task_id: task.id, id: comment.id }
+        end.to change(Comment, :count).from(1).to(0)
       end
     end
 
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :destroy, params: { project_id: task.project.id, task_id: task.id, id: rand(0...10) }
+        delete :destroy, params: { project_id: task.project.id, task_id: task.id, id: rand(0..10) }
       end
 
       it do

@@ -27,12 +27,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)).to eq([{ id: task.id,
-                                                   project_id: task.project.id,
-                                                   title: task.title,
-                                                   completed: task.completed,
-                                                   deadline: task.deadline
-                                                 }])
+        expect(response).to match_response_schema('tasks')
       end
     end
 
@@ -43,11 +38,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it do
-        expect(response).to have_http_status(:found)
-      end
-
-      it do
-        expect(JSON.parse(response.body)).to be_empty
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
@@ -65,11 +56,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)).to eq({ id: task.id,
-                                                                  project_id: task.project.id,
-                                                                  title: task.title,
-                                                                  completed: task.completed,
-                                                                  deadline: task.deadline })
+        expect(response).to match_response_schema('task')
       end
     end
 
@@ -81,10 +68,6 @@ describe Api::V1::TasksController, api: true, type: :controller do
 
       it do
         expect(response).to have_http_status(:not_found)
-      end
-
-      it do
-        expect(JSON.parse(response.body)).to be_nil
       end
     end
   end
@@ -102,20 +85,14 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)['data']['task']).to eq({ id: task.id,
-                                                                  project_id: task.project.id,
-                                                                  title: new_title,
-                                                                  completed: task.completed,
-                                                                  deadline: task.deadline,
-                                                                  created_at: task.created_at,
-                                                                  updated_at: task.updated_at })
+        expect(response).to match_response_schema('task')
       end
     end
 
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :create, params: { project_id: project.id, id: rand(0..10) }
+        get :create, params: { project_id: rand(0..10) }
       end
 
       it do
@@ -123,7 +100,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)).to eq(['Project must exist'])
+        expect(response).to match_response_schema('errors')
       end
     end
   end
@@ -132,6 +109,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
     include Docs::V1::Tasks::Update
     context 'when success' do
       before do
+        task
         request.headers[JWTSessions.access_header] = access_token
         put :update, params: { project_id: project.id, id: task.id, title: new_title }
       end
@@ -141,26 +119,19 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it do
-        expect(JSON.parse(response.body)).to eq({ id: task.id,
-                                                                  project_id: task.project.id,
-                                                                  title: new_title,
-                                                                  completed: task.completed,
-                                                                  deadline: task.deadline })
+        expect(response).to match_response_schema('task')
       end
     end
 
     context 'when failure' do
       before do
+        task
         request.headers[JWTSessions.access_header] = access_token
         put :update, params: { project_id: project.id, id: rand(0..10) }
       end
 
       it do
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-
-      it do
-        expect(JSON.parse(response.body)).to eq(["Name can't be blank"])
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
@@ -169,20 +140,21 @@ describe Api::V1::TasksController, api: true, type: :controller do
     include Docs::V1::Tasks::Destroy
     context 'when success' do
       before do
+        task
         request.headers[JWTSessions.access_header] = access_token
       end
 
       it do
         expect do
-          get :destroy, params: { project_id: task.project.id, task_id: task.id, id: comment.id }
-        end.to change(Task, :count).by(-1)
+          delete :destroy, params: { project_id: task.project.id, id: task.id }
+        end.to change(Task, :count).from(1).to(0)
       end
     end
 
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :destroy, params: { project_id: project.id, id: rand(0..10) }
+        delete :destroy, params: { project_id: project.id, id: rand(0..10) }
       end
 
       it do
