@@ -18,6 +18,10 @@ module Docs
         action 'Get project'
       end
 
+      document :update do
+        action 'Get project'
+      end
+
       document :show do
         action 'Get an project'
       end

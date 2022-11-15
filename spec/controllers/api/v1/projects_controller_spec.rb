@@ -1,5 +1,5 @@
 describe Api::V1::ProjectsController do
-  # include Docs::V1::Projects::Api
+  include Docs::V1::Projects::Api
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
 
@@ -14,7 +14,7 @@ describe Api::V1::ProjectsController do
 
   describe 'GET #index' do
     context 'when success' do
-      # include Docs::V1::Projects::Index
+      include Docs::V1::Projects::Index
       before do
         project
         request.headers[JWTSessions.access_header] = access_token
@@ -26,9 +26,7 @@ describe Api::V1::ProjectsController do
       end
 
       it do
-        expect(JSON.parse(response.body)).to eq([{ 'id' => project.id,
-                                                   'name' => project.name,
-                                                   'user_id' => project.user.id }])
+        expect(response).to match_response_schema('projects')
       end
     end
 
@@ -50,7 +48,7 @@ describe Api::V1::ProjectsController do
 
   describe 'GET #show' do
     context 'when success' do
-      # include Docs::V1::Projects::Show
+      include Docs::V1::Projects::Show
       before do
         project
         request.headers[JWTSessions.access_header] = access_token
@@ -62,9 +60,7 @@ describe Api::V1::ProjectsController do
       end
 
       it do
-        expect(JSON.parse(response.body)).to eq({ 'id' => project.id,
-                                                  'name' => project.name,
-                                                  'user_id' => project.user.id })
+        expect(response).to match_response_schema('project')
       end
     end
 
@@ -82,7 +78,7 @@ describe Api::V1::ProjectsController do
 
   describe 'POST #create' do
     context 'when success' do
-      # include Docs::V1::Projects::Create
+      include Docs::V1::Projects::Create
       before do
         request.headers[JWTSessions.access_header] = access_token
         get :create, params: { name: new_name }
@@ -93,9 +89,7 @@ describe Api::V1::ProjectsController do
       end
 
       it do
-        expect(JSON.parse(response.body)).to eq({ 'id' => project.id - 1,
-                                                  'name' => new_name,
-                                                  'user_id' => project.user.id })
+        expect(response).to match_response_schema('project')
       end
     end
 
@@ -110,14 +104,14 @@ describe Api::V1::ProjectsController do
       end
 
       it do
-        expect(JSON.parse(response.body)['errors']).to eq(["Name can't be blank"])
+        expect(response).to match_response_schema('errors')
       end
     end
   end
 
   describe 'PUT #update' do
     context 'when success' do
-      # include Docs::V1::Projects::Update
+      include Docs::V1::Projects::Update
       before do
         project
         request.headers[JWTSessions.access_header] = access_token
@@ -129,9 +123,7 @@ describe Api::V1::ProjectsController do
       end
 
       it do
-        expect(JSON.parse(response.body)).to eq({ 'id' => project.id,
-                                                  'name' => new_name,
-                                                  'user_id' => project.user.id })
+        expect(response).to match_response_schema('project')
       end
     end
 
@@ -149,7 +141,7 @@ describe Api::V1::ProjectsController do
 
   describe 'DELETE #destroy' do
     context 'when success' do
-      # include Docs::V1::Projects::Destroy
+      include Docs::V1::Projects::Destroy
       before do
         project
         request.headers[JWTSessions.access_header] = access_token
