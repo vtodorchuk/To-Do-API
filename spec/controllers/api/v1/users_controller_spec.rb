@@ -11,7 +11,7 @@ describe Api::V1::UsersController do
                                 password_confirmation: 'password' }
       end
 
-      it 'has status success' do
+      it 'has status success', :dox do
         expect(response).to have_http_status(:created)
       end
 

@@ -21,11 +21,11 @@ describe Api::V1::ProjectsController do
         get :index
       end
 
-      it do
+      it 'has status', :dox do
         expect(response).to have_http_status(:found)
       end
 
-      it do
+      it 'get projects', :dox do
         expect(response).to match_response_schema('projects')
       end
     end
@@ -55,11 +55,11 @@ describe Api::V1::ProjectsController do
         get :show, params: { id: project.id }
       end
 
-      it do
+      it 'has status', :dox do
         expect(response).to have_http_status(:found)
       end
 
-      it do
+      it 'show project', :dox do
         expect(response).to match_response_schema('project')
       end
     end
@@ -84,11 +84,11 @@ describe Api::V1::ProjectsController do
         get :create, params: { name: new_name }
       end
 
-      it do
+      it 'has status', :dox do
         expect(response).to have_http_status(:created)
       end
 
-      it do
+      it 'add project', :dox do
         expect(response).to match_response_schema('project')
       end
     end
@@ -118,11 +118,11 @@ describe Api::V1::ProjectsController do
         put :update, params: { id: project.id, name: new_name }
       end
 
-      it do
+      it 'has status', :dox do
         expect(response).to have_http_status(:ok)
       end
 
-      it do
+      it 'update project', :dox do
         expect(response).to match_response_schema('project')
       end
     end
@@ -148,7 +148,7 @@ describe Api::V1::ProjectsController do
         get :destroy, params: { id: project.id }
       end
 
-      it do
+      it 'has status', :dox do
         expect(response).to have_http_status(:ok)
       end
     end

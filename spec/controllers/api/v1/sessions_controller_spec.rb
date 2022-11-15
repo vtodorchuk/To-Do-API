@@ -9,7 +9,7 @@ describe Api::V1::SessionsController, type: :controller do
         post :create, params: { username: user.username, password: user.password }
       end
 
-      it 'has status success' do
+      it 'has status success', :dox do
         expect(response).to have_http_status(:created)
       end
 
@@ -47,11 +47,11 @@ describe Api::V1::SessionsController, type: :controller do
         delete :destroy
       end
 
-      it 'has status success' do
+      it 'has status success', :dox do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'has return json with tokens' do
+      it 'has return json with tokens', :dox do
         expect(response.body).to eq(' ')
       end
     end
