@@ -14,19 +14,19 @@ describe Api::V1::TasksController, api: true, type: :controller do
   end
 
   describe 'GET #index' do
+    include Docs::V1::Tasks::Index
     context 'when success' do
-      include Docs::V1::Tasks::Index
       before do
         task
         request.headers[JWTSessions.access_header] = access_token
         get :index, params: { project_id: project.id }
       end
 
-      it do
+      it 'has status', :dox do
         expect(response).to have_http_status(:found)
       end
 
-      it do
+      it 'get tasks', :dox do
         expect(response).to match_response_schema('tasks')
       end
     end
@@ -44,18 +44,18 @@ describe Api::V1::TasksController, api: true, type: :controller do
   end
 
   describe 'GET #show' do
+    include Docs::V1::Tasks::Show
     context 'when success' do
-      include Docs::V1::Tasks::Show
       before do
         request.headers[JWTSessions.access_header] = access_token
         get :show, params: { project_id: project.id, id: task.id }
       end
 
-      it do
+      it 'has status', :dox do
         expect(response).to have_http_status(:found)
       end
 
-      it do
+      it 'show task', :dox do
         expect(response).to match_response_schema('task')
       end
     end
@@ -73,18 +73,18 @@ describe Api::V1::TasksController, api: true, type: :controller do
   end
 
   describe 'POST #create' do
+    include Docs::V1::Tasks::Create
     context 'when success' do
-      include Docs::V1::Tasks::Create
       before do
         request.headers[JWTSessions.access_header] = access_token
         get :create, params: { project_id: project.id, title: new_title }
       end
 
-      it do
+      it 'has status', :dox do
         expect(response).to have_http_status(:created)
       end
 
-      it do
+      it 'add task', :dox do
         expect(response).to match_response_schema('task')
       end
     end
@@ -114,11 +114,11 @@ describe Api::V1::TasksController, api: true, type: :controller do
         put :update, params: { project_id: project.id, id: task.id, title: new_title }
       end
 
-      it do
+      it 'has status', :dox do
         expect(response).to have_http_status(:ok)
       end
 
-      it do
+      it 'update task', :dox do
         expect(response).to match_response_schema('task')
       end
     end
@@ -144,7 +144,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it do
+      it 'destroy task', :dox do
         expect do
           delete :destroy, params: { project_id: task.project.id, id: task.id }
         end.to change(Task, :count).from(1).to(0)

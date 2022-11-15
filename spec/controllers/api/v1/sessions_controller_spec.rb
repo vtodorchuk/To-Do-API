@@ -3,8 +3,8 @@ describe Api::V1::SessionsController, type: :controller do
   let(:user) { create(:user) }
 
   describe 'POST create' do
+    include Docs::V1::Sessions::Create
     context 'when success' do
-      include Docs::V1::Sessions::Create
       before do
         post :create, params: { username: user.username, password: user.password }
       end
@@ -36,8 +36,8 @@ describe Api::V1::SessionsController, type: :controller do
   end
 
   describe 'DELETE destroy' do
+    include Docs::V1::Sessions::Destroy
     context 'when success' do
-      include Docs::V1::Sessions::Destroy
       before do
         payload = { user_id: user.id }
         session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)

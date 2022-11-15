@@ -3,8 +3,8 @@ describe Api::V1::UsersController do
   let(:user) { create(:user) }
 
   describe 'POST create' do
+    include Docs::V1::Sessions::Create
     context 'when success' do
-      include Docs::V1::Sessions::Create
       before do
         post :create, params: { username: FFaker::Lorem.characters(User::MIN_USERNAME_LENGTH.next),
                                 password: 'password',
