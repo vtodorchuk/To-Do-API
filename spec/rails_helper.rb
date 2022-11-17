@@ -7,7 +7,6 @@ require 'rspec/rails'
 require 'dox'
 require_relative 'support/configs/should_matcher'
 require_relative 'support/configs/dox'
-require_relative 'support/configs/json_schema'
 
 begin
   ActiveRecord::Migration.maintain_test_schema!

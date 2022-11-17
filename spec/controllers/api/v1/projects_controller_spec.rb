@@ -26,7 +26,9 @@ describe Api::V1::ProjectsController do
       end
 
       it 'get projects', :dox do
-        expect(response).to match_response_schema('projects')
+        expect(JSON.parse(response.body)).to eq([{ 'id' => project.id,
+                                                   'name' => project.name,
+                                                   'user_id' => project.user.id }])
       end
     end
 
@@ -60,7 +62,9 @@ describe Api::V1::ProjectsController do
       end
 
       it 'show project', :dox do
-        expect(response).to match_response_schema('project')
+        expect(JSON.parse(response.body)).to eq({ 'id' => project.id,
+                                                  'name' => project.name,
+                                                  'user_id' => project.user.id })
       end
     end
 
@@ -89,7 +93,7 @@ describe Api::V1::ProjectsController do
       end
 
       it 'add project', :dox do
-        expect(response).to match_response_schema('project')
+        expect(JSON.parse(response.body)['name']).to eq(new_name)
       end
     end
 
@@ -104,7 +108,7 @@ describe Api::V1::ProjectsController do
       end
 
       it do
-        expect(response).to match_response_schema('errors')
+        expect(JSON.parse(response.body)['errors']).to eq(['Name can\'t be blank'])
       end
     end
   end
@@ -123,7 +127,9 @@ describe Api::V1::ProjectsController do
       end
 
       it 'update project', :dox do
-        expect(response).to match_response_schema('project')
+        expect(JSON.parse(response.body)).to eq({ 'id' => project.id,
+                                                  'name' => project.reload.name,
+                                                  'user_id' => project.user.id })
       end
     end
 
