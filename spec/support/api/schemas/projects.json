@@ -1,8 +1,0 @@
-{
-  "type": "array",
-  "properties": {
-    "id": { "type": "integer" },
-    "name": { "type": "text" },
-    "user_id": { "type": "integer" }
-  }
-}

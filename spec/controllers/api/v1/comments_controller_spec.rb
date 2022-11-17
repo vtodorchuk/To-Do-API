@@ -104,7 +104,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it do
-        expect(response).to match_response_schema('errors')
+        expect(JSON.parse(response.body)['errors']).to eq(['Body is too long (maximum is 500 characters)'])
       end
     end
   end
