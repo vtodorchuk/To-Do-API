@@ -12,106 +12,86 @@ describe Api::V1::CommentsController, api: true, type: :controller do
   end
 
   describe 'GET #index' do
+    include Docs::V1::Comments::Index
     context 'when success' do
-      include Docs::V1::Comments::Index
       before do
         comment
         request.headers[JWTSessions.access_header] = access_token
-        get :index, params: { project_id: task.project.id, task_id: task.id }
       end
 
       it 'has status', :dox do
+        get :index, params: { project_id: task.project.id, task_id: task.id }
         expect(response).to have_http_status(:found)
-      end
-
-      it 'get comments', :dox do
-        expect(JSON.parse(response.body)).to eq([{ 'id' => comment.id,
-                                                   'body' => comment.body,
-                                                   'task_id' => comment.task.id }])
       end
     end
 
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :index, params: { project_id: task.project.id, task_id: rand(0..10) }
       end
 
-      it do
+      it 'has status', :dox do
+        get :index, params: { project_id: task.project.id, task_id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end
     end
   end
 
   describe 'GET #show' do
+    include Docs::V1::Comments::Show
     context 'when success' do
-      include Docs::V1::Comments::Show
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :show, params: { project_id: task.project.id, task_id: task.id, id: comment.id }
       end
 
       it 'has status', :dox do
+        get :show, params: { project_id: task.project.id, task_id: task.id, id: comment.id }
         expect(response).to have_http_status(:found)
-      end
-
-      it 'show comment', :dox do
-        expect(JSON.parse(response.body)).to eq({ 'id' => comment.id,
-                                                  'body' => comment.body,
-                                                  'task_id' => comment.task.id })
       end
     end
 
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :show, params: { project_id: task.project.id, task_id: task.id, id: rand(0...10) }
       end
 
-      it do
+      it 'has status', :dox do
+        get :show, params: { project_id: task.project.id, task_id: task.id, id: rand(0...10) }
         expect(response).to have_http_status(:not_found)
       end
     end
   end
 
   describe 'POST #create' do
+    include Docs::V1::Comments::Create
     context 'when success' do
-      include Docs::V1::Comments::Create
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :create, params: { project_id: task.project.id, task_id: task.id, body: comment_attributes[:body] }
       end
 
       it 'has status', :dox do
+        get :create, params: { project_id: task.project.id, task_id: task.id, body: comment_attributes[:body] }
         expect(response).to have_http_status(:created)
-      end
-
-      it 'add comment', :dox do
-        expect(JSON.parse(response.body)['body']).to eq(comment_attributes[:body])
       end
     end
 
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
+      end
+
+      it 'has status', :dox do
         get :create, params: { project_id: task.project.id,
                                task_id: task.id,
                                body: 'a' * Comment::MAX_BODY_LENGTH.next }
-      end
-
-      it do
         expect(response).to have_http_status(:unprocessable_entity)
-      end
-
-      it do
-        expect(JSON.parse(response.body)['errors']).to eq(['Body is too long (maximum is 500 characters)'])
       end
     end
   end
 
   describe 'DELETE #destroy' do
+    include Docs::V1::Comments::Destroy
     context 'when success' do
-      include Docs::V1::Comments::Destroy
       before do
         comment
         request.headers[JWTSessions.access_header] = access_token
@@ -127,10 +107,10 @@ describe Api::V1::CommentsController, api: true, type: :controller do
     context 'when failure' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        delete :destroy, params: { project_id: task.project.id, task_id: task.id, id: rand(0..10) }
       end
 
-      it do
+      it 'has status', :dox do
+        delete :destroy, params: { project_id: task.project.id, task_id: task.id, id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end
     end

@@ -14,11 +14,7 @@ module Docs
       end
 
       document :create do
-        action 'Get User' do
-          path '/sing_up'
-          verb 'POST'
-          desc 'Sing up'
-        end
+        action 'Get User'
       end
     end
   end

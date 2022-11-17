@@ -15,23 +15,23 @@ module Docs
       end
 
       document :index do
-        action 'Get project'
+        action 'Get projects'
       end
 
       document :update do
-        action 'Get project'
+        action 'Get projects'
       end
 
       document :show do
-        action 'Get an project'
+        action 'Get an projects'
       end
 
       document :create do
-        action 'Create an project'
+        action 'Create an projects'
       end
 
       document :destroy do
-        action 'Delete an project'
+        action 'Delete an projects'
       end
     end
   end

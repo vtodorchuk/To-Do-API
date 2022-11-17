@@ -13,8 +13,8 @@ describe Api::V1::ProjectsController, api: true, type: :controller do
   end
 
   describe 'GET #index' do
+    include Docs::V1::Projects::Index
     context 'when success' do
-      include Docs::V1::Projects::Index
       before do
         project
         request.headers[JWTSessions.access_header] = access_token
@@ -28,8 +28,8 @@ describe Api::V1::ProjectsController, api: true, type: :controller do
   end
 
   describe 'GET #show' do
+    include Docs::V1::Projects::Show
     context 'when success' do
-      include Docs::V1::Projects::Show
       before do
         project
         request.headers[JWTSessions.access_header] = access_token
@@ -54,8 +54,8 @@ describe Api::V1::ProjectsController, api: true, type: :controller do
   end
 
   describe 'POST #create' do
+    include Docs::V1::Projects::Create
     context 'when success' do
-      include Docs::V1::Projects::Create
       before do
         request.headers[JWTSessions.access_header] = access_token
       end
@@ -79,8 +79,8 @@ describe Api::V1::ProjectsController, api: true, type: :controller do
   end
 
   describe 'PUT #update' do
+    include Docs::V1::Projects::Update
     context 'when success' do
-      include Docs::V1::Projects::Update
       before do
         project
         request.headers[JWTSessions.access_header] = access_token
@@ -110,8 +110,8 @@ describe Api::V1::ProjectsController, api: true, type: :controller do
   end
 
   describe 'DELETE #destroy' do
+    include Docs::V1::Projects::Destroy
     context 'when success' do
-      include Docs::V1::Projects::Destroy
       before do
         project
         request.headers[JWTSessions.access_header] = access_token
