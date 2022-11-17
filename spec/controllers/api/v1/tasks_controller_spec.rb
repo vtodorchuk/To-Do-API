@@ -14,8 +14,8 @@ describe Api::V1::TasksController, api: true, type: :controller do
   end
 
   describe 'GET #index' do
-    include Docs::V1::Tasks::Index
     context 'when success' do
+      include Docs::V1::Tasks::Index
       before do
         task
         request.headers[JWTSessions.access_header] = access_token
@@ -27,7 +27,12 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it 'get tasks', :dox do
-        expect(response).to match_response_schema('tasks')
+        expect(response.body).to eq([{ 'id' => task.id,
+                                       'project_id' => task.project_id,
+                                       'title' => task.title,
+                                       'completed' => task.completed,
+                                       'deadline' => task.deadline,
+                                       'position' => task.position }].to_json)
       end
     end
 
@@ -44,8 +49,8 @@ describe Api::V1::TasksController, api: true, type: :controller do
   end
 
   describe 'GET #show' do
-    include Docs::V1::Tasks::Show
     context 'when success' do
+      include Docs::V1::Tasks::Show
       before do
         request.headers[JWTSessions.access_header] = access_token
         get :show, params: { project_id: project.id, id: task.id }
@@ -56,7 +61,12 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it 'show task', :dox do
-        expect(response).to match_response_schema('task')
+        expect(response.body).to eq({ 'id' => task.id,
+                                      'project_id' => task.project_id,
+                                      'title' => task.title,
+                                      'completed' => task.completed,
+                                      'deadline' => task.deadline,
+                                      'position' => task.position }.to_json)
       end
     end
 
@@ -73,8 +83,8 @@ describe Api::V1::TasksController, api: true, type: :controller do
   end
 
   describe 'POST #create' do
-    include Docs::V1::Tasks::Create
     context 'when success' do
+      include Docs::V1::Tasks::Create
       before do
         request.headers[JWTSessions.access_header] = access_token
         get :create, params: { project_id: project.id, title: new_title }
@@ -85,7 +95,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it 'add task', :dox do
-        expect(response).to match_response_schema('task')
+        expect(JSON.parse(response.body)['title']).to eq(new_title)
       end
     end
 
@@ -100,14 +110,14 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it do
-        expect(response).to match_response_schema('errors')
+        expect(JSON.parse(response.body)['errors']).to eq(['Project must exist'])
       end
     end
   end
 
   describe 'PUT #update' do
-    include Docs::V1::Tasks::Update
     context 'when success' do
+      include Docs::V1::Tasks::Update
       before do
         task
         request.headers[JWTSessions.access_header] = access_token
@@ -119,7 +129,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it 'update task', :dox do
-        expect(response).to match_response_schema('task')
+        expect(JSON.parse(response.body)['title']).to eq(task.reload.title)
       end
     end
 
@@ -137,8 +147,8 @@ describe Api::V1::TasksController, api: true, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    include Docs::V1::Tasks::Destroy
     context 'when success' do
+      include Docs::V1::Tasks::Destroy
       before do
         task
         request.headers[JWTSessions.access_header] = access_token

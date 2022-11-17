@@ -50,10 +50,6 @@ describe Api::V1::SessionsController, type: :controller do
       it 'has status success', :dox do
         expect(response).to have_http_status(:ok)
       end
-
-      it 'has return json with tokens', :dox do
-        expect(response.body).to eq(' ')
-      end
     end
   end
 end

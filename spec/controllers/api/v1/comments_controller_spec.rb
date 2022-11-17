@@ -12,10 +12,10 @@ describe Api::V1::CommentsController, api: true, type: :controller do
   end
 
   describe 'GET #index' do
-    include Docs::V1::Comments::Index
     context 'when success' do
+      include Docs::V1::Comments::Index
       before do
-        task
+        comment
         request.headers[JWTSessions.access_header] = access_token
         get :index, params: { project_id: task.project.id, task_id: task.id }
       end
@@ -25,7 +25,9 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it 'get comments', :dox do
-        expect(response).to match_response_schema('comments')
+        expect(JSON.parse(response.body)).to eq([{ 'id' => comment.id,
+                                                   'body' => comment.body,
+                                                   'task_id' => comment.task.id }])
       end
     end
 
@@ -42,8 +44,8 @@ describe Api::V1::CommentsController, api: true, type: :controller do
   end
 
   describe 'GET #show' do
-    include Docs::V1::Comments::Show
     context 'when success' do
+      include Docs::V1::Comments::Show
       before do
         request.headers[JWTSessions.access_header] = access_token
         get :show, params: { project_id: task.project.id, task_id: task.id, id: comment.id }
@@ -54,7 +56,9 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it 'show comment', :dox do
-        expect(response).to match_response_schema('comment')
+        expect(JSON.parse(response.body)).to eq({ 'id' => comment.id,
+                                                  'body' => comment.body,
+                                                  'task_id' => comment.task.id })
       end
     end
 
@@ -71,8 +75,8 @@ describe Api::V1::CommentsController, api: true, type: :controller do
   end
 
   describe 'POST #create' do
-    include Docs::V1::Comments::Create
     context 'when success' do
+      include Docs::V1::Comments::Create
       before do
         request.headers[JWTSessions.access_header] = access_token
         get :create, params: { project_id: task.project.id, task_id: task.id, body: comment_attributes[:body] }
@@ -83,7 +87,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it 'add comment', :dox do
-        expect(response).to match_response_schema('comment')
+        expect(JSON.parse(response.body)['body']).to eq(comment_attributes[:body])
       end
     end
 
@@ -106,8 +110,8 @@ describe Api::V1::CommentsController, api: true, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    include Docs::V1::Comments::Destroy
     context 'when success' do
+      include Docs::V1::Comments::Destroy
       before do
         comment
         request.headers[JWTSessions.access_header] = access_token
