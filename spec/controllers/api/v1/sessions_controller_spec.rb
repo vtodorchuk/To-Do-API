@@ -10,7 +10,6 @@ describe Api::V1::SessionsController, api: true, type: :controller do
       end
 
       it 'has status success', :dox do
-        post :create, params: { email: user.email, password: user.password }
         expect(response).to have_http_status(:created)
       end
 
@@ -27,7 +26,6 @@ describe Api::V1::SessionsController, api: true, type: :controller do
       end
 
       it 'has status unauthorized', :dox do
-        post :create, params: { email: FFaker::Internet.email, password: 'wrong_password' }
         expect(response).to have_http_status(:unauthorized)
       end
 
