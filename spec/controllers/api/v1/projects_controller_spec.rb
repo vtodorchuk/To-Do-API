@@ -104,7 +104,7 @@ describe Api::V1::ProjectsController, api: true, type: :controller do
 
       it 'has status', :dox do
         put :update, params: { id: rand(0...12) }
-        expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

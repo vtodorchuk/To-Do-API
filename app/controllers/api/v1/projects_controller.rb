@@ -1,25 +1,25 @@
 class Api::V1::ProjectsController < ApplicationController
   before_action :authorize_access_request!
   def index
-    @projects = Project.where(user_id: current_user.id)
+    result = V1::Project::Operation::Index.call(current_user: current_user)
 
-    render json: @projects.to_json(only: %i[id name user_id]), status: :found
+    render json: V1::ProjectSerializer.new(result[:projects]), status: :found
   end
 
   def create
-    @project = Project.new(name: params[:name], user_id: current_user.id)
+    result = V1::Project::Operation::Create.call(current_user: current_user, params: params)
 
-    if @project&.save
-      render json: @project.to_json(only: %i[id name user_id]), status: :created
+    if result.success?
+      render json: V1::ProjectSerializer.new(result[:project]), status: :created
     else
-      render json: { errors: @project.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: result[:errors] }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @project = Project.where(id: params[:id], user_id: current_user.id).first
+    result = V1::Project::Operation::Destroy.call(current_user: current_user, params: params)
 
-    if @project&.destroy
+    if result.success?
       render status: :ok
     else
       render status: :not_found
@@ -27,22 +27,22 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.where(id: params[:id], user_id: current_user.id).first
+    result = V1::Project::Operation::Show.call(current_user: current_user, params: params)
 
-    if @project
-      render json: @project.to_json(only: %i[id name user_id]), status: :found
+    if result.success?
+      render json: V1::ProjectSerializer.new(result[:project]), status: :found
     else
       render status: :not_found
     end
   end
 
   def update
-    @project = Project.where(id: params[:id], user_id: current_user.id).first
+    result = V1::Project::Operation::Update.call(current_user: current_user, params: params)
 
-    if @project&.update(name: params[:name])
-      render json: @project.to_json(only: %i[id name user_id]), status: :ok
+    if result.success?
+      render json: V1::ProjectSerializer.new(result[:project]), status: :ok
     else
-      render status: :not_found
+      render json: { errors: result[:errors] }, status: :unprocessable_entity
     end
   end
 end
