@@ -4,7 +4,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.10'
 
 gem 'bootsnap', '>= 1.4.4', require: false
-gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'jsonapi-serializer'
 gem 'jwt', '~> 2.2', '>= 2.2.1'
 gem 'jwt_sessions', '~> 2.7', '>= 2.7.4'
