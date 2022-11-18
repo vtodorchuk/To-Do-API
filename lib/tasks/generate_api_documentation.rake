@@ -2,24 +2,29 @@
 require 'rspec/core/rake_task'
 
 namespace :api do
-  namespace :v1 do
-    desc 'Generate API v1 documentation'
-
-    md_file = 'spec/docs/v1/md/docs.md'
-    html_file = 'public/docs/v1.html'
-
+  namespace :doc do
+    desc 'Generate API documentation markdown'
     task md: :environment do
+      require 'rspec/core/rake_task'
+
       RSpec::Core::RakeTask.new(:api_spec) do |t|
-        t.rspec_opts = "-f Dox::Formatter --order defined --tag dox --out #{md_file}"
+        t.pattern = 'spec/controllers/api/v1/'
+        t.rspec_opts = '-f Dox::Formatter --order defined --tag dox --out public/api/docs/v1/apispec.md'
       end
 
       Rake::Task['api_spec'].invoke
     end
 
-    task html: :environment do
-      system("aglio -i #{md_file} -o #{html_file}")
+    task html: :md do
+      `aglio -i public/api/docs/v1/apispec.md -o public/api/docs/v1/index.html`
     end
 
-    task docs: ['api:v1:md', 'api:v1:html']
+    task open: :html do
+      `open public/api/docs/v1/index.html`
+    end
+
+    task publish: :md do
+      `apiary publish --path=public/api/docs/v1/apispec.md --api-name=doxdemo`
+    end
   end
 end

@@ -10,6 +10,7 @@ describe Api::V1::SessionsController, api: true, type: :controller do
       end
 
       it 'has status success', :dox do
+        post :create, params: { email: user.email, password: user.password }
         expect(response).to have_http_status(:created)
       end
 
@@ -26,6 +27,7 @@ describe Api::V1::SessionsController, api: true, type: :controller do
       end
 
       it 'has status unauthorized', :dox do
+        post :create, params: { email: FFaker::Internet.email, password: 'wrong_password' }
         expect(response).to have_http_status(:unauthorized)
       end
 
@@ -44,10 +46,10 @@ describe Api::V1::SessionsController, api: true, type: :controller do
         tokens = session.login
         request.headers[JWTSessions.access_header] = "Bearer #{tokens[:access]}"
         request.headers[JWTSessions.csrf_header] = tokens[:csrf]
-        delete :destroy
       end
 
       it 'has status success', :dox do
+        delete :destroy
         expect(response).to have_http_status(:ok)
       end
     end
