@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2022_11_18_125553) do
     t.string "password"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["username"], name: "unique_username", unique: true
   end
 
 end
