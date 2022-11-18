@@ -6,7 +6,7 @@ describe Api::V1::SessionsController, type: :controller do
     context 'when success' do
       include Docs::V1::Sessions::Create
       before do
-        post :create, params: { email: user.email, password: user.password }
+        post :create, params: { username: user.username, password: user.password }
       end
 
       it 'has status success' do
@@ -14,14 +14,14 @@ describe Api::V1::SessionsController, type: :controller do
       end
 
       it 'has return json with tokens' do
-        expect(JSON.parse(response.body)['session'].keys.sort).to eq %w[access access_expires_at csrf refresh
-                                                                        refresh_expires_at]
+        expect(JSON.parse(response.body).keys.sort).to eq %w[access access_expires_at csrf refresh
+                                                             refresh_expires_at]
       end
     end
 
     context 'when unsuccessful' do
       before do
-        post :create, params: { email: FFaker::Internet.email, password: 'wrong_password' }
+        post :create, params: { username: FFaker::Lorem.word, password: 'wrong_password' }
       end
 
       it 'has status unauthorized' do
@@ -29,7 +29,7 @@ describe Api::V1::SessionsController, type: :controller do
       end
 
       it 'has return empty json' do
-        expect(JSON.parse(response.body)).to be_nil
+        expect(JSON.parse(response.body)).to be_empty
       end
     end
   end

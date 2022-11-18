@@ -1,10 +1,11 @@
-require_relative '../../../services/v1/users_service'
-
 class Api::V1::UsersController < ApplicationController
   def create
-    user = V1::UsersService.new
-    user.call(params)
+    result = User::Operation::Create.call(params: params)
 
-    render json: user.data, status: user.status
+    if result.success?
+      render json: result[:data], status: :created
+    else
+      render json: I18n.t("session.sing_up.message.errors.#{result[:param]}"), status: :unprocessable_entity
+    end
   end
 end

@@ -5,13 +5,13 @@ en:
         success: 'You are successfully sing up!. Thanks!'
         errors:
           error: 'User was not created!'
-          email: 'This email is already taken!'
+          username: 'This username is already taken!'
           password: 'Passwords do not match!'
     sing_in:
       message:
         success: 'You are successfully sing in!'
         errors:
-          email: 'User this this email is not exits!'
+          username: 'User this this username is not exits!'
     sign_out:
       message:
         success: 'Goodbye, Hope to see you soon!'

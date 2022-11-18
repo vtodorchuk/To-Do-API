@@ -6,7 +6,7 @@ describe Api::V1::UsersController do
     context 'when success' do
       include Docs::V1::Sessions::Create
       before do
-        post :create, params: { email: FFaker::Internet.email,
+        post :create, params: { username: FFaker::Lorem.word,
                                 password: 'password',
                                 password_confirmation: 'password' }
       end
@@ -16,7 +16,8 @@ describe Api::V1::UsersController do
       end
 
       it 'has return json with tokens' do
-        expect(JSON.parse(response.body)['user'].keys).to eq %w[access csrf]
+        expect(JSON.parse(response.body).keys.sort).to eq %w[access access_expires_at csrf refresh
+                                                             refresh_expires_at]
       end
     end
   end
