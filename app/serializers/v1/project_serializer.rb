@@ -1,7 +1,7 @@
 class V1::ProjectSerializer
   include JSONAPI::Serializer
 
-  attribute :id, :name
+  attributes :id, :name
 
   belongs_to :user
 end
