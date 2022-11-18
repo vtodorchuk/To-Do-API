@@ -1,4 +1,4 @@
-class Session::Operation::Destroy < Trailblazer::Operation
+class V1::Session::Operation::Destroy < Trailblazer::Operation
   step :find_session
 
   def find_session(_ctx, payload:, **)

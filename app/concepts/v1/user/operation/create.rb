@@ -1,4 +1,4 @@
-class User::Operation::Create < Trailblazer::Operation
+class V1::User::Operation::Create < Trailblazer::Operation
   step :validates_user?
   step :create_user
   step :validates_password?

@@ -1,4 +1,4 @@
-class Session::Operation::Create < Trailblazer::Operation
+class V1::Session::Operation::Create < Trailblazer::Operation
   step :find_user
   step :validates_password
   step :generate_tokens

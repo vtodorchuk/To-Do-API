@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   def create
-    result = User::Operation::Create.call(params: params)
+    result = V1::User::Operation::Create.call(params: params)
 
     if result.success?
       render json: result[:data], status: :created
