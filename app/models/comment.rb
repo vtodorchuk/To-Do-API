@@ -4,4 +4,5 @@ class Comment < ApplicationRecord
   belongs_to :task
 
   validates :body, presence: true, length: { maximum: MAX_BODY_LENGTH }
+  has_one_attached :file
 end
