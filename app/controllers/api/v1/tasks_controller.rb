@@ -13,14 +13,12 @@ class Api::V1::TasksController < ApplicationController
 
   def create
     result = V1::Task::Operation::Create.call(project_id: params[:project_id], params: task_params,
-                                             current_user: current_user)
+                                              current_user: current_user)
 
     if result.success?
       render json: V1::TaskSerializer.new(result[:task]), status: :created
     else
-      render json: { errors: result[:errors] }, status: :unprocessable_entity if result[:errors]
-
-      render status: :not_found unless result[:errors]
+      render json: { errors: result[:errors] }, status: result[:status]
     end
   end
 
@@ -42,9 +40,7 @@ class Api::V1::TasksController < ApplicationController
     if result.success?
       render json: V1::TaskSerializer.new(result[:task]), status: :ok
     else
-      render json: { errors: result[:errors] }, status: :unprocessable_entity if result[:errors]
-
-      render status: :not_found unless result[:errors]
+      render json: { errors: result[:errors] }, status: result[:status]
     end
   end
 

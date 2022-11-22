@@ -60,8 +60,6 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
-    addressable (2.8.1)
-      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.651.0)
@@ -115,8 +113,6 @@ GEM
       concurrent-ruby (~> 1.0)
     jmespath (1.6.1)
     json (2.6.2)
-    json-schema (3.0.0)
-      addressable (>= 2.8)
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
     jwt (2.5.0)
@@ -147,7 +143,6 @@ GEM
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    public_suffix (5.0.0)
     puma (5.6.5)
       nio4r (~> 2.0)
     racc (1.6.0)
@@ -324,7 +319,6 @@ DEPENDENCIES
   factory_bot_rails (~> 6.2)
   fasterer (~> 0.10.0)
   ffaker (~> 2.21)
-  json-schema
   jsonapi-serializer
   jwt (~> 2.2, >= 2.2.1)
   jwt_sessions (~> 2.7, >= 2.7.4)

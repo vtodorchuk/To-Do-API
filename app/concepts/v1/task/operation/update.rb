@@ -1,6 +1,6 @@
 class V1::Task::Operation::Update < Trailblazer::Operation
-  step :find_project, fail_fast: true
-  step :find_task, fail_fast: true
+  step :find_project
+  step :find_task
   step :update_task
 
   fail :add_errors
@@ -17,7 +17,13 @@ class V1::Task::Operation::Update < Trailblazer::Operation
     task.update(params)
   end
 
-  def add_errors(ctx, task:, **)
-    ctx[:errors] = task.errors.full_messages
+  def add_errors(ctx, **)
+    if ctx[:task]
+      ctx[:errors] = ctx[:task].errors.full_messages
+      ctx[:status] = :unprocessable_entity
+    else
+      ctx[:errors] = ['Not Found']
+      ctx[:status] = :not_found
+    end
   end
 end

@@ -132,7 +132,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
 
       context 'when completed' do
         let(:params) { { project_id: project.id, id: task.id, completed: params_task[:completed] } }
-        
+
         before { put :update, params: params }
 
         it 'change completed', :dox do

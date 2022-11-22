@@ -1,7 +1,8 @@
 describe Api::V1::CommentsController, api: true, type: :controller do
   include Docs::V1::Comments::Api
   let(:user) { create(:user) }
-  let(:task) { create(:task) }
+  let(:project) { create(:project, user: user) }
+  let(:task) { create(:task, project: project) }
   let(:comment) { create(:comment, task: task) }
   let(:comment_attributes) { attributes_for(:comment) }
 
