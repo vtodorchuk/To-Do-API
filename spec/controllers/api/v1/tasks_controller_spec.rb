@@ -47,7 +47,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        get :show, params: { project_id: project.id, id: task.id }
+        get :show, params: { id: task.id }
         expect(response).to have_http_status(:found)
       end
     end
@@ -58,7 +58,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        get :show, params: { project_id: project.id, id: rand(0...10) }
+        get :show, params: { id: rand(0...10) }
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -101,7 +101,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       context 'when status' do
-        let(:params) { { project_id: project.id, id: task.id, title: params_task[:title] } }
+        let(:params) { { id: task.id, title: params_task[:title] } }
 
         before { put :update, params: params }
 
@@ -111,7 +111,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       context 'when update title' do
-        let(:params) { { project_id: project.id, id: task.id, title: params_task[:title] } }
+        let(:params) { { id: task.id, title: params_task[:title] } }
 
         before { put :update, params: params }
 
@@ -121,7 +121,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       context 'when update position' do
-        let(:params) { { project_id: project.id, id: task.id, position: params_task[:position] + 1 } }
+        let(:params) { { id: task.id, position: params_task[:position] + 1 } }
 
         before { put :update, params: params }
 
@@ -131,7 +131,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       context 'when completed' do
-        let(:params) { { project_id: project.id, id: task.id, completed: params_task[:completed] } }
+        let(:params) { { id: task.id, completed: params_task[:completed] } }
 
         before { put :update, params: params }
 
@@ -148,7 +148,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        put :update, params: { project_id: project.id, id: rand(0..10) }
+        put :update, params: { id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -164,7 +164,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
 
       it 'destroy task', :dox do
         expect do
-          delete :destroy, params: { project_id: task.project.id, id: task.id }
+          delete :destroy, params: { id: task.id }
         end.to change(Task, :count).from(1).to(0)
       end
     end
@@ -175,7 +175,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        delete :destroy, params: { project_id: project.id, id: rand(0..10) }
+        delete :destroy, params: { id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end
     end

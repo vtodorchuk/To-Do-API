@@ -1,16 +1,11 @@
 class V1::Task::Operation::Update < Trailblazer::Operation
-  step :find_project
   step :find_task
   step :update_task
 
   fail :add_errors
 
-  def find_project(ctx, current_user:, project_id:, **)
-    ctx[:project] = current_user.projects.find_by(id: project_id)
-  end
-
-  def find_task(ctx, project:, params:, **)
-    ctx[:task] = project.tasks.find_by(id: params[:id])
+  def find_task(ctx, params:, **)
+    ctx[:task] = Task.find_by(id: params[:id])
   end
 
   def update_task(_ctx, task:, params:, **)

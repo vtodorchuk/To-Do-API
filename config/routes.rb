@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resource :session, only: %i[create destroy]
 
       resources :projects do
-        resources :tasks do
+        resources :tasks, shallow: true do
           resources :comments
         end
       end

@@ -21,7 +21,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        get :index, params: { project_id: task.project.id, task_id: task.id }
+        get :index, params: { task_id: task.id }
         expect(response).to have_http_status(:found)
       end
     end
@@ -32,7 +32,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        get :index, params: { project_id: task.project.id, task_id: rand(0..10) }
+        get :index, params: { task_id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -46,7 +46,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        get :show, params: { project_id: task.project.id, task_id: task.id, id: comment.id }
+        get :show, params: { id: comment.id }
         expect(response).to have_http_status(:found)
       end
     end
@@ -57,7 +57,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        get :show, params: { project_id: task.project.id, task_id: task.id, id: rand(0...10) }
+        get :show, params: { id: rand(0...10) }
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -71,14 +71,14 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        get :create, params: { project_id: task.project.id, task_id: task.id, body: comment_attributes[:body] }
+        get :create, params: { task_id: task.id, body: comment_attributes[:body] }
         expect(response).to have_http_status(:created)
       end
 
       context 'when add image' do
         let(:image) { fixture_file_upload('./test_picture.png', 'image/png') }
         let(:params) do
-          { project_id: task.project.id, task_id: task.id, body: comment_attributes[:body], image: image }
+          { task_id: task.id, body: comment_attributes[:body], image: image }
         end
 
         it 'has image', :dox do
@@ -94,8 +94,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        get :create, params: { project_id: task.project.id,
-                               task_id: task.id,
+        get :create, params: { task_id: task.id,
                                body: 'a' * Comment::MAX_BODY_LENGTH.next }
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -112,7 +111,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
 
       it 'delete comment', :dox do
         expect do
-          delete :destroy, params: { project_id: task.project.id, task_id: task.id, id: comment.id }
+          delete :destroy, params: { id: comment.id }
         end.to change(Comment, :count).from(1).to(0)
       end
     end
@@ -123,7 +122,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        delete :destroy, params: { project_id: task.project.id, task_id: task.id, id: rand(0..10) }
+        delete :destroy, params: { id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end
     end

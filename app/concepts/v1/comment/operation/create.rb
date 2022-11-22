@@ -1,17 +1,12 @@
 class V1::Comment::Operation::Create < Trailblazer::Operation
-  step :find_project
   step :find_task
   step :initialize_comment
   step :save_comment
 
   fail :add_errors
 
-  def find_project(ctx, current_user:, params:, **)
-    ctx[:project] = current_user.projects.find_by(id: params[:project_id])
-  end
-
-  def find_task(ctx, project:, params:, **)
-    ctx[:task] = project.tasks.find_by(id: params[:task_id])
+  def find_task(ctx, params:, **)
+    ctx[:task] = Task.find_by(id: params[:task_id])
   end
 
   def initialize_comment(ctx, task:, comment_params:, **)
