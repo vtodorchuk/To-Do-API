@@ -2,7 +2,11 @@ class Comment < ApplicationRecord
   MAX_BODY_LENGTH = 500
 
   belongs_to :task
+  has_one_attached :image
 
   validates :body, presence: true, length: { maximum: MAX_BODY_LENGTH }
-  has_one_attached :file
+
+  def image_url
+    Rails.application.routes.url_helpers.rails_blob_url(image) if image.attached?
+  end
 end

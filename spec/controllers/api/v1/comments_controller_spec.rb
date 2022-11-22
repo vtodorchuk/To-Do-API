@@ -74,6 +74,18 @@ describe Api::V1::CommentsController, api: true, type: :controller do
         get :create, params: { project_id: task.project.id, task_id: task.id, body: comment_attributes[:body] }
         expect(response).to have_http_status(:created)
       end
+
+      context 'when add image' do
+        let(:image) { fixture_file_upload('./test_picture.png', 'image/png') }
+        let(:params) do
+          { project_id: task.project.id, task_id: task.id, body: comment_attributes[:body], image: image }
+        end
+
+        it 'has image', :dox do
+          get :create, params: params
+          expect(task.comments.last.image.attached?).to be true
+        end
+      end
     end
 
     context 'when failure' do

@@ -45,7 +45,7 @@ class Api::V1::CommentsController < ApplicationController
   private
 
   def comment_params
-    params.permit(:body, :task_id)
+    params.permit(:body, :image)
   end
 
   def task

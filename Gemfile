@@ -3,8 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.10'
 
-gem 'aws-sdk-s3', require: false
+gem "aws-sdk-s3", require: false
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'image_processing', '>= 1.2'
 gem 'jsonapi-serializer'
 gem 'jwt', '~> 2.2', '>= 2.2.1'
 gem 'jwt_sessions', '~> 2.7', '>= 2.7.4'
