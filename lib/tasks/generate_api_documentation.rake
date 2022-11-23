@@ -1,6 +1,4 @@
 # lib/tasks/generate_api_documentation.rake
-require 'rspec/core/rake_task'
-
 namespace :dox do
   desc 'Generate API documentation markdown'
 
