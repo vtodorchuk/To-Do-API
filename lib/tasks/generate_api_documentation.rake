@@ -1,30 +1,33 @@
 # lib/tasks/generate_api_documentation.rake
 require 'rspec/core/rake_task'
 
-namespace :api do
-  namespace :doc do
-    desc 'Generate API documentation markdown'
-    task md: :environment do
-      require 'rspec/core/rake_task'
+namespace :dox do
+  desc 'Generate API documentation markdown'
 
-      RSpec::Core::RakeTask.new(:api_spec) do |t|
-        t.pattern = 'spec/controllers/api/v1/'
-        t.rspec_opts = '-f Dox::Formatter --order defined --tag dox --out public/api/docs/v1/apispec.md'
-      end
+  task :json, [:version, :docs_path, :host] => :environment do |_, args|
+    require 'rspec/core/rake_task'
+    version = args[:version] || :v1
 
-      Rake::Task['api_spec'].invoke
+    RSpec::Core::RakeTask.new(:api_spec) do |t|
+      t.pattern = "spec/controllers/api/#{version}"
+      t.rspec_opts =
+        "-f Dox::Formatter --tag dox --order defined --out spec/docs/#{version}/apispec.json"
     end
 
-    task html: :md do
-      `aglio -i public/api/docs/v1/apispec.md -o public/api/docs/v1/index.html`
-    end
+    Rake::Task['api_spec'].invoke
+  end
 
-    task open: :html do
-      `open public/api/docs/v1/index.html`
-    end
+  task :html, [:version, :docs_path, :host] => :json do |_, args|
+    version = args[:version] || :v1
+    docs_path = args[:docs_path] || "api/#{version}/docs"
 
-    task publish: :md do
-      `apiary publish --path=public/api/docs/v1/apispec.md --api-name=doxdemo`
-    end
+    `redoc-cli bundle -o public/#{docs_path}/index.html spec/docs/#{version}/apispec.json`
+  end
+
+  task :open, [:version, :docs_path, :host] => :html do |_, args|
+    version = args[:version] || :v1
+    docs_path = args[:docs_path] || "api/#{version}/docs"
+
+    `open public/#{docs_path}/index.html`
   end
 end

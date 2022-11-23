@@ -25,7 +25,7 @@ describe Api::V1::SessionsController, api: true, type: :controller do
              params: { username: FFaker::Lorem.characters(User::MIN_USERNAME_LENGTH.next), password: 'wrong_password' }
       end
 
-      it 'has status unauthorized', :dox do
+      it 'has status unauthorized' do
         expect(response).to have_http_status(:unauthorized)
       end
 

@@ -32,7 +32,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it 'has status', :dox do
+      it 'has status' do
         get :index, params: { project_id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end
@@ -57,7 +57,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it 'has status', :dox do
+      it 'has status' do
         get :show, params: { id: rand(0...10) }
         expect(response).to have_http_status(:not_found)
       end
@@ -69,7 +69,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
     context 'when success' do
       before do
         request.headers[JWTSessions.access_header] = access_token
-        get :create, params: { project_id: project.id, title: new_title, deadline: params_task[:deadline] }
+        post :create, params: { project_id: project.id, title: new_title, deadline: params_task[:deadline] }
       end
 
       it 'has status', :dox do
@@ -86,8 +86,8 @@ describe Api::V1::TasksController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it 'has status', :dox do
-        get :create, params: { project_id: rand(0..10) }
+      it 'has status' do
+        post :create, params: { project_id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -103,9 +103,8 @@ describe Api::V1::TasksController, api: true, type: :controller do
       context 'when status' do
         let(:params) { { id: task.id, title: params_task[:title] } }
 
-        before { put :update, params: params }
-
         it 'has status', :dox do
+          put :update, params: params
           expect(response).to have_http_status(:ok)
         end
       end
@@ -113,9 +112,8 @@ describe Api::V1::TasksController, api: true, type: :controller do
       context 'when update title' do
         let(:params) { { id: task.id, title: params_task[:title] } }
 
-        before { put :update, params: params }
-
         it 'change title', :dox do
+          put :update, params: params
           expect(task.reload.title).to eq(params_task[:title])
         end
       end
@@ -123,20 +121,18 @@ describe Api::V1::TasksController, api: true, type: :controller do
       context 'when update position' do
         let(:params) { { id: task.id, position: params_task[:position] + 1 } }
 
-        before { put :update, params: params }
-
         it 'change position', :dox do
+          put :update, params: params
           expect(task.reload.position).to eq(params_task[:position] + 1)
         end
       end
 
       context 'when completed' do
-        let(:params) { { id: task.id, completed: params_task[:completed] } }
-
-        before { put :update, params: params }
+        let(:params) { { id: task.id, completed: true } }
 
         it 'change completed', :dox do
-          expect(task.reload.completed).to eq(params_task[:completed])
+          put :update, params: params
+          expect(task.reload.completed).to eq(true)
         end
       end
     end
@@ -174,7 +170,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it 'has status', :dox do
+      it 'has status' do
         delete :destroy, params: { id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end

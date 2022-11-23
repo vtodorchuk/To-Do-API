@@ -31,7 +31,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it 'has status', :dox do
+      it 'has status' do
         get :index, params: { task_id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end
@@ -56,7 +56,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it 'has status', :dox do
+      it 'has status' do
         get :show, params: { id: rand(0...10) }
         expect(response).to have_http_status(:not_found)
       end
@@ -71,21 +71,21 @@ describe Api::V1::CommentsController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        get :create, params: { task_id: task.id, body: comment_attributes[:body] }
+        post :create, params: { task_id: task.id, body: comment_attributes[:body] }
         expect(response).to have_http_status(:created)
       end
 
-      context 'when add image' do
-        let(:image) { fixture_file_upload('./test_picture.png', 'image/png') }
-        let(:params) do
-          { task_id: task.id, body: comment_attributes[:body], image: image }
-        end
-
-        it 'has image', :dox do
-          get :create, params: params
-          expect(task.comments.last.image.attached?).to be true
-        end
-      end
+      # context 'when add image' do
+      #   let(:image) { fixture_file_upload('./test_picture.png', 'image/png') }
+      #   let(:params) do
+      #     { task_id: task.id, body: comment_attributes[:body], image: image }
+      #   end
+      #
+      #   it 'has image', :dox do
+      #     post :create, params: params
+      #     expect(task.comments.last.image.attached?).to be true
+      #   end
+      # end
     end
 
     context 'when failure' do
@@ -93,8 +93,8 @@ describe Api::V1::CommentsController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it 'has status', :dox do
-        get :create, params: { task_id: task.id,
+      it 'has status' do
+        post :create, params: { task_id: task.id,
                                body: 'a' * Comment::MAX_BODY_LENGTH.next }
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -121,7 +121,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it 'has status', :dox do
+      it 'has status' do
         delete :destroy, params: { id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end

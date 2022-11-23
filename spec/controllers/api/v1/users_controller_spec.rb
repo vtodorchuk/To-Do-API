@@ -15,7 +15,7 @@ describe Api::V1::UsersController, api: true, type: :controller do
         expect(response).to have_http_status(:created)
       end
 
-      it 'has return json with tokens' do
+      it 'has return json with tokens', :dox do
         expect(JSON.parse(response.body).keys.sort).to eq %w[access access_expires_at csrf refresh
                                                              refresh_expires_at]
       end

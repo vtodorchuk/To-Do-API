@@ -15,23 +15,23 @@ module Docs
       end
 
       document :index do
-        action 'Get task'
+        action 'Get all tasks'
       end
 
       document :show do
-        action 'Get an task'
+        action 'Get a task'
       end
 
       document :create do
-        action 'Create an task'
+        action 'Create a task'
       end
 
       document :update do
-        action 'Get task'
+        action 'Update a task'
       end
 
       document :destroy do
-        action 'Delete an task'
+        action 'Delete a task'
       end
     end
   end

@@ -15,7 +15,7 @@ module Docs
       end
 
       document :index do
-        action 'Get comment'
+        action 'Get all comments for task'
       end
 
       document :show do
