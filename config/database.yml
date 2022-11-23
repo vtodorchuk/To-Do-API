@@ -83,4 +83,4 @@ test:
 #
 production:
   <<: *default
-  database: to_do_api_production
+  database: to_do_production
