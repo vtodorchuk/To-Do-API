@@ -6,4 +6,4 @@ You can easy manage tasks, prioritize them and
 
 Documentation
 
-- [Documentation](http://docs.doxdemo.apiary.io)
+- [Documentation](https://to-do-api-fj1.herokuapp.com/api/v1/documentation.html)
