@@ -6,4 +6,4 @@ You can easy manage tasks, prioritize them and
 
 Documentation
 
-- [Documentation](https://to-do-api-fj1.herokuapp.com/api/v1/documentation.html)
+- [Documentation](https://to-do-api-fj1.herokuapp.com/api/v1/docs/documentation.html)
