@@ -75,17 +75,17 @@ describe Api::V1::CommentsController, api: true, type: :controller do
         expect(response).to have_http_status(:created)
       end
 
-      # context 'when add image' do
-      #   let(:image) { fixture_file_upload('./test_picture.png', 'image/png') }
-      #   let(:params) do
-      #     { task_id: task.id, body: comment_attributes[:body], image: image }
-      #   end
-      #
-      #   it 'has image', :dox do
-      #     post :create, params: params
-      #     expect(task.comments.last.image.attached?).to be true
-      #   end
-      # end
+      context 'when add image' do
+        let(:image) { fixture_file_upload('./test_picture.png', 'image/png') }
+        let(:params) do
+          { task_id: task.id, body: comment_attributes[:body], image: image }
+        end
+
+        it 'has image', :dox do
+          post :create, params: params
+          expect(task.comments.last.image.attached?).to be true
+        end
+      end
     end
 
     context 'when failure' do
@@ -95,7 +95,7 @@ describe Api::V1::CommentsController, api: true, type: :controller do
 
       it 'has status' do
         post :create, params: { task_id: task.id,
-                               body: 'a' * Comment::MAX_BODY_LENGTH.next }
+                                body: 'a' * Comment::MAX_BODY_LENGTH.next }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
