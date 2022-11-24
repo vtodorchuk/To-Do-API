@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   default_url_options host: 'localhost:3000' if Rails.env.development? || Rails.env.test?
 
-  default_url_options host: 'https://to-do-api-fj1.herokuapp.com' if Rails.env.production?
+  default_url_options host: ENV['HOST_DOMAIN'] if Rails.env.production?
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
