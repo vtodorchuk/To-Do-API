@@ -143,7 +143,7 @@ describe Api::V1::TasksController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it 'has status', :dox do
+      it 'has status' do
         put :update, params: { id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end

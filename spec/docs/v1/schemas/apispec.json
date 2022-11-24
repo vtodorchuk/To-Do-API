@@ -6,299 +6,6 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/v1/projects": {
-      "get": {
-        "summary": "Get all projects for current_user",
-        "tags": [
-          "Projects"
-        ],
-        "description": "",
-        "parameters": [
-
-        ],
-        "responses": {
-          "302": {
-            "description": "Found",
-            "content": {
-              "application/json; charset=utf-8": {
-                "examples": {
-                  "has status": {
-                    "summary": "has status",
-                    "value": {
-                      "data": [
-
-                      ]
-                    }
-                  }
-                }
-              }
-            },
-            "headers": {
-              "Content-Type": {
-                "description": "application/json; charset=utf-8"
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Create an project",
-        "tags": [
-          "Projects"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "example": "application/x-www-form-urlencoded"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "any": {
-              "examples": {
-                "has status": {
-                  "summary": "has status",
-                  "value": "name=necessitatibus"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json; charset=utf-8": {
-                "examples": {
-                  "has status": {
-                    "summary": "has status",
-                    "value": {
-                      "data": {
-                        "id": "1148",
-                        "type": "project",
-                        "attributes": {
-                          "id": 1148,
-                          "name": "necessitatibus"
-                        },
-                        "relationships": {
-                          "user": {
-                            "data": {
-                              "id": "1721",
-                              "type": "user"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "headers": {
-              "Content-Type": {
-                "description": "application/json; charset=utf-8"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/projects/{id}": {
-      "get": {
-        "summary": "Get an project",
-        "tags": [
-          "Projects"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "example": "1147"
-          }
-        ],
-        "responses": {
-          "302": {
-            "description": "Found",
-            "content": {
-              "application/json; charset=utf-8": {
-                "examples": {
-                  "has status": {
-                    "summary": "has status",
-                    "value": {
-                      "data": {
-                        "id": "1147",
-                        "type": "project",
-                        "attributes": {
-                          "id": 1147,
-                          "name": "accusantium"
-                        },
-                        "relationships": {
-                          "user": {
-                            "data": {
-                              "id": "1720",
-                              "type": "user"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "headers": {
-              "Content-Type": {
-                "description": "application/json; charset=utf-8"
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "summary": "Update project",
-        "tags": [
-          "Projects"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "example": "1149"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "example": "application/x-www-form-urlencoded"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "any": {
-              "examples": {
-                "has status": {
-                  "summary": "has status",
-                  "value": "name=repellendus"
-                },
-                "update projects": {
-                  "summary": "update projects",
-                  "value": "name=minima"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json; charset=utf-8": {
-                "examples": {
-                  "has status": {
-                    "summary": "has status",
-                    "value": {
-                      "data": {
-                        "id": "1149",
-                        "type": "project",
-                        "attributes": {
-                          "id": 1149,
-                          "name": "repellendus"
-                        },
-                        "relationships": {
-                          "user": {
-                            "data": {
-                              "id": "1722",
-                              "type": "user"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "update projects": {
-                    "summary": "update projects",
-                    "value": {
-                      "data": {
-                        "id": "1150",
-                        "type": "project",
-                        "attributes": {
-                          "id": 1150,
-                          "name": "minima"
-                        },
-                        "relationships": {
-                          "user": {
-                            "data": {
-                              "id": "1723",
-                              "type": "user"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "headers": {
-              "Content-Type": {
-                "description": "application/json; charset=utf-8"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete an project",
-        "tags": [
-          "Projects"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "example": "1151"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "example": "application/x-www-form-urlencoded"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain; charset=utf-8": {
-                "examples": {
-                  "has status": {
-                    "summary": "has status",
-                    "value": " "
-                  }
-                }
-              }
-            },
-            "headers": {
-              "Content-Type": {
-                "description": "text/plain; charset=utf-8"
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/tasks/{task_id}/comments": {
       "get": {
         "summary": "Get all comments for task",
@@ -313,7 +20,12 @@
             "schema": {
               "type": "number"
             },
-            "example": "824"
+            "example": "1154"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODAsInVzZXJfaWQiOjIzNjksInVpZCI6IjUzZDJkZDUyLWUyOTktNGZhYS1hNzBjLWM4NDY4NGZkMjkxZCJ9.0d2530oFfGhlSmbvgTghqkFmPk81swZr5KgI0t6hHQU"
           }
         ],
         "responses": {
@@ -352,7 +64,12 @@
             "schema": {
               "type": "number"
             },
-            "example": "826"
+            "example": "1156"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODAsInVzZXJfaWQiOjIzNzEsInVpZCI6IjAzN2JkOGE3LTUyM2ItNDM4MC1iMDM4LWRiNTdmMGQ1ZTIzNSJ9.lFpK3GEKMLICEjP-_HDtq0I50oElaCZ60zBuBP5OqW8"
           },
           {
             "name": "Content-Type",
@@ -366,11 +83,11 @@
               "examples": {
                 "has status": {
                   "summary": "has status",
-                  "value": "body=Odit+totam+doloremque+provident+laborum+dolor."
+                  "value": "body=Velit+necessitatibus+tempora+exercitationem+quod+repudiandae+unde+dignissimos+voluptatum."
                 },
                 "has image": {
                   "summary": "has image",
-                  "value": "{\n  \"body\": \"Omnis ullam praesentium reprehenderit quibusdam aliquam reiciendis.\",\n  \"image\": {\n    \"filename\": \"test_picture.png\",\n    \"type\": \"image/png\",\n    \"name\": \"image\",\n    \"tempfile\": \"#<File:0x00007f89b1d16c48>\",\n    \"head\": \"content-disposition: form-data; name=\\\"image\\\"; filename=\\\"test_picture.png\\\"\\r\\ncontent-type: image/png\\r\\ncontent-length: 1267036\\r\\n\"\n  }\n}"
+                  "value": "{\n  \"body\": \"Ad architecto quidem enim itaque iste.\",\n  \"image\": {\n    \"filename\": \"test_picture.png\",\n    \"type\": \"image/png\",\n    \"name\": \"image\",\n    \"tempfile\": \"#<File:0x00007f8eb2424760>\",\n    \"head\": \"content-disposition: form-data; name=\\\"image\\\"; filename=\\\"test_picture.png\\\"\\r\\ncontent-type: image/png\\r\\ncontent-length: 1267036\\r\\n\"\n  }\n}"
                 }
               }
             }
@@ -386,17 +103,17 @@
                     "summary": "has status",
                     "value": {
                       "data": {
-                        "id": "232",
+                        "id": "344",
                         "type": "comment",
                         "attributes": {
-                          "id": 232,
-                          "body": "Odit totam doloremque provident laborum dolor.",
+                          "id": 344,
+                          "body": "Velit necessitatibus tempora exercitationem quod repudiandae unde dignissimos voluptatum.",
                           "image_url": null
                         },
                         "relationships": {
                           "task": {
                             "data": {
-                              "id": "826",
+                              "id": "1156",
                               "type": "task"
                             }
                           }
@@ -408,17 +125,17 @@
                     "summary": "has image",
                     "value": {
                       "data": {
-                        "id": "233",
+                        "id": "345",
                         "type": "comment",
                         "attributes": {
-                          "id": 233,
-                          "body": "Omnis ullam praesentium reprehenderit quibusdam aliquam reiciendis.",
-                          "image_url": "http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--7cc1c68fb4ec828e41ebb3be586866f6dd3d4eab/test_picture.png"
+                          "id": 345,
+                          "body": "Ad architecto quidem enim itaque iste.",
+                          "image_url": "http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBIUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--b88c743dae712f62bd6b89b046403309c283a101/test_picture.png"
                         },
                         "relationships": {
                           "task": {
                             "data": {
-                              "id": "827",
+                              "id": "1157",
                               "type": "task"
                             }
                           }
@@ -452,7 +169,12 @@
             "schema": {
               "type": "number"
             },
-            "example": "231"
+            "example": "343"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODAsInVzZXJfaWQiOjIzNzAsInVpZCI6IjIxNjIzYTY4LWIzM2UtNGUzZC1hYzY1LWI3Njc3ZTdmZjkwMiJ9.vqKp17j9pyuQUQNBL3KE8KF-AaJy8WlsmYLb0kSDu1A"
           }
         ],
         "responses": {
@@ -465,17 +187,17 @@
                     "summary": "has status",
                     "value": {
                       "data": {
-                        "id": "231",
+                        "id": "343",
                         "type": "comment",
                         "attributes": {
-                          "id": 231,
-                          "body": "Molestias quibusdam excepturi magnam animi.",
+                          "id": 343,
+                          "body": "Eligendi adipisci sint iste debitis repellendus blanditiis laudantium facere.",
                           "image_url": null
                         },
                         "relationships": {
                           "task": {
                             "data": {
-                              "id": "825",
+                              "id": "1155",
                               "type": "task"
                             }
                           }
@@ -507,7 +229,12 @@
             "schema": {
               "type": "number"
             },
-            "example": "234"
+            "example": "346"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzNzMsInVpZCI6ImEwY2UyMWNiLTkwYTAtNDUwMy1iMmE2LTg3NTQzMzZiYzM4ZCJ9.mbv3z1KNviLwR9ke-52BWv05ZTJaQQG7kJw4mvw70Lg"
           },
           {
             "name": "Content-Type",
@@ -537,6 +264,323 @@
         }
       }
     },
+    "/api/v1/projects": {
+      "get": {
+        "summary": "Get all projects for current_user",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzNzQsInVpZCI6IjIxYWJjZjAwLWQ3MjAtNGUzMi05MGJlLWI1NWU5MjA5MjlmOSJ9.Jcf9-xjwG8R88XADUK1yXjuD8HuTz8iqCimPl8oZYcc"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Found",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": [
+
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an project",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzNzYsInVpZCI6Ijk1NWYwN2VkLWJmNGUtNGI2Mi1hZjc5LWU1NTkzOWY0MTEwOSJ9.czusbt0fZYCJjKpnTHZtSCPu5e_f5cqW9gQuQsCwBbA"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "any": {
+              "examples": {
+                "has status": {
+                  "summary": "has status",
+                  "value": "name=beatae"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": {
+                        "id": "1583",
+                        "type": "project",
+                        "attributes": {
+                          "id": 1583,
+                          "name": "beatae"
+                        },
+                        "relationships": {
+                          "user": {
+                            "data": {
+                              "id": "2376",
+                              "type": "user"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{id}": {
+      "get": {
+        "summary": "Get an project",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1582"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzNzUsInVpZCI6IjgyYWRhNjYyLWY5NTQtNDFiMC05ZWEzLWFjZjRkNTNjNGZiZSJ9.hIzn24o9z4apGijXzTbPfqj112xlZ6CKZ4TjCek-U2Q"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Found",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": {
+                        "id": "1582",
+                        "type": "project",
+                        "attributes": {
+                          "id": 1582,
+                          "name": "accusamus"
+                        },
+                        "relationships": {
+                          "user": {
+                            "data": {
+                              "id": "2375",
+                              "type": "user"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update project",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1584"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzNzcsInVpZCI6Ijc4ZDZiYTZiLTBhZGYtNGJiZS05NjViLTUxMDc4NzcwYWNmOSJ9.8Tw9_aREayIKFaVJciSFT1TKN4NSZsNBbIm-HbRygLw"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "any": {
+              "examples": {
+                "has status": {
+                  "summary": "has status",
+                  "value": "name=quia"
+                },
+                "update projects": {
+                  "summary": "update projects",
+                  "value": "name=sit"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": {
+                        "id": "1584",
+                        "type": "project",
+                        "attributes": {
+                          "id": 1584,
+                          "name": "quia"
+                        },
+                        "relationships": {
+                          "user": {
+                            "data": {
+                              "id": "2377",
+                              "type": "user"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "update projects": {
+                    "summary": "update projects",
+                    "value": {
+                      "data": {
+                        "id": "1585",
+                        "type": "project",
+                        "attributes": {
+                          "id": 1585,
+                          "name": "sit"
+                        },
+                        "relationships": {
+                          "user": {
+                            "data": {
+                              "id": "2378",
+                              "type": "user"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an project",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1586"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzNzksInVpZCI6Ijc0MmZkYWI5LThlOGItNDBhYi05MjU3LTYwYzlmMzNlMzM5MSJ9.i6UISP7el0S0Kbc8XqVMKvn1ZlIKR_X8Aq7QW4pZLhk"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": " "
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "text/plain; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/projects/{project_id}/tasks": {
       "get": {
         "summary": "Get all tasks",
@@ -551,7 +595,12 @@
             "schema": {
               "type": "number"
             },
-            "example": "1152"
+            "example": "1587"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzODMsInVpZCI6IjI2ZGI0NDhlLWM2MTMtNDA2Ny1hNzhiLThmNTQzOGEwZGRhNCJ9.Qhpz4gszwTm4gJbtrLJ7Q77PPQ5Do4_JaSUNaCJCM5g"
           }
         ],
         "responses": {
@@ -565,18 +614,18 @@
                     "value": {
                       "data": [
                         {
-                          "id": "829",
+                          "id": "1159",
                           "type": "task",
                           "attributes": {
-                            "id": 829,
-                            "title": "non",
-                            "deadline": "2022-12-23T16:34:59.616Z",
+                            "id": 1159,
+                            "title": "laboriosam",
+                            "deadline": "2022-12-03T18:03:01.494Z",
                             "completed": false
                           },
                           "relationships": {
                             "project": {
                               "data": {
-                                "id": "1152",
+                                "id": "1587",
                                 "type": "project"
                               }
                             },
@@ -614,7 +663,12 @@
             "schema": {
               "type": "number"
             },
-            "example": "1154"
+            "example": "1589"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzODUsInVpZCI6IjA3OTE3NzUwLTY0YTEtNDA1YS1iYWVjLTUzZjYyMjBmZWMyMCJ9.HjsOtcgfyEY2KqPjprQvXwNuk0kxZMyS1V_JGcNQ1MA"
           },
           {
             "name": "Content-Type",
@@ -628,11 +682,11 @@
               "examples": {
                 "has status": {
                   "summary": "has status",
-                  "value": "deadline=2022-12-22T18%3A34%3A59%2B02%3A00&title=occaecati"
+                  "value": "deadline=2022-12-22T20%3A03%3A01%2B02%3A00&title=facilis"
                 },
                 "has json": {
                   "summary": "has json",
-                  "value": "deadline=2022-12-15T18%3A34%3A59%2B02%3A00&title=optio"
+                  "value": "deadline=2022-12-03T20%3A03%3A01%2B02%3A00&title=architecto"
                 }
               }
             }
@@ -648,18 +702,18 @@
                     "summary": "has status",
                     "value": {
                       "data": {
-                        "id": "831",
+                        "id": "1161",
                         "type": "task",
                         "attributes": {
-                          "id": 831,
-                          "title": "occaecati",
-                          "deadline": "2022-12-22T16:34:59.000Z",
+                          "id": 1161,
+                          "title": "facilis",
+                          "deadline": "2022-12-22T18:03:01.000Z",
                           "completed": false
                         },
                         "relationships": {
                           "project": {
                             "data": {
-                              "id": "1154",
+                              "id": "1589",
                               "type": "project"
                             }
                           },
@@ -676,18 +730,18 @@
                     "summary": "has json",
                     "value": {
                       "data": {
-                        "id": "832",
+                        "id": "1162",
                         "type": "task",
                         "attributes": {
-                          "id": 832,
-                          "title": "optio",
-                          "deadline": "2022-12-15T16:34:59.000Z",
+                          "id": 1162,
+                          "title": "architecto",
+                          "deadline": "2022-12-03T18:03:01.000Z",
                           "completed": false
                         },
                         "relationships": {
                           "project": {
                             "data": {
-                              "id": "1155",
+                              "id": "1590",
                               "type": "project"
                             }
                           },
@@ -726,7 +780,12 @@
             "schema": {
               "type": "number"
             },
-            "example": "830"
+            "example": "1160"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzODQsInVpZCI6IjQzMjQ2ODI5LTlmZjMtNDA2ZC1hMjY0LTk2MzY0MTg2NGFkNCJ9.dpAKGMuDQAtKR7ZrEnW_6wVrfffDIasApYSBNw4SxHo"
           }
         ],
         "responses": {
@@ -739,18 +798,18 @@
                     "summary": "has status",
                     "value": {
                       "data": {
-                        "id": "830",
+                        "id": "1160",
                         "type": "task",
                         "attributes": {
-                          "id": 830,
-                          "title": "eligendi",
-                          "deadline": "2022-11-28T16:34:59.679Z",
+                          "id": 1160,
+                          "title": "exercitationem",
+                          "deadline": "2022-12-17T18:03:01.526Z",
                           "completed": false
                         },
                         "relationships": {
                           "project": {
                             "data": {
-                              "id": "1153",
+                              "id": "1588",
                               "type": "project"
                             }
                           },
@@ -787,7 +846,12 @@
             "schema": {
               "type": "number"
             },
-            "example": "833"
+            "example": "1163"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzODcsInVpZCI6IjJhNzViN2Q3LWQ5Y2UtNDgxMy1hYTY0LWI0Mzg2ZDk2N2UzNCJ9.rJ78ALv6ScDoid_cqYPL2HDl1WH8u-uBzf1y2UDNn9E"
           },
           {
             "name": "Content-Type",
@@ -801,11 +865,11 @@
               "examples": {
                 "has status": {
                   "summary": "has status",
-                  "value": "title=possimus"
+                  "value": "title=unde"
                 },
                 "change title": {
                   "summary": "change title",
-                  "value": "title=dolorem"
+                  "value": "title=culpa"
                 },
                 "change position": {
                   "summary": "change position",
@@ -829,18 +893,18 @@
                     "summary": "has status",
                     "value": {
                       "data": {
-                        "id": "833",
+                        "id": "1163",
                         "type": "task",
                         "attributes": {
-                          "id": 833,
-                          "title": "possimus",
-                          "deadline": "2022-12-24T16:34:59.767Z",
+                          "id": 1163,
+                          "title": "unde",
+                          "deadline": "2022-12-04T18:03:01.604Z",
                           "completed": false
                         },
                         "relationships": {
                           "project": {
                             "data": {
-                              "id": "1156",
+                              "id": "1591",
                               "type": "project"
                             }
                           },
@@ -857,18 +921,18 @@
                     "summary": "change title",
                     "value": {
                       "data": {
-                        "id": "834",
+                        "id": "1164",
                         "type": "task",
                         "attributes": {
-                          "id": 834,
-                          "title": "dolorem",
-                          "deadline": "2022-11-25T16:34:59.810Z",
+                          "id": 1164,
+                          "title": "culpa",
+                          "deadline": "2022-12-11T18:03:01.633Z",
                           "completed": false
                         },
                         "relationships": {
                           "project": {
                             "data": {
-                              "id": "1157",
+                              "id": "1592",
                               "type": "project"
                             }
                           },
@@ -885,18 +949,18 @@
                     "summary": "change position",
                     "value": {
                       "data": {
-                        "id": "835",
+                        "id": "1165",
                         "type": "task",
                         "attributes": {
-                          "id": 835,
+                          "id": 1165,
                           "title": "unde",
-                          "deadline": "2022-12-11T16:34:59.834Z",
+                          "deadline": "2022-11-26T18:03:01.658Z",
                           "completed": false
                         },
                         "relationships": {
                           "project": {
                             "data": {
-                              "id": "1158",
+                              "id": "1593",
                               "type": "project"
                             }
                           },
@@ -913,18 +977,18 @@
                     "summary": "change completed",
                     "value": {
                       "data": {
-                        "id": "836",
+                        "id": "1166",
                         "type": "task",
                         "attributes": {
-                          "id": 836,
-                          "title": "deleniti",
-                          "deadline": "2022-12-22T16:34:59.860Z",
+                          "id": 1166,
+                          "title": "excepturi",
+                          "deadline": "2022-11-28T18:03:01.684Z",
                           "completed": true
                         },
                         "relationships": {
                           "project": {
                             "data": {
-                              "id": "1159",
+                              "id": "1594",
                               "type": "project"
                             }
                           },
@@ -935,28 +999,6 @@
                           }
                         }
                       }
-                    }
-                  }
-                }
-              }
-            },
-            "headers": {
-              "Content-Type": {
-                "description": "application/json; charset=utf-8"
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json; charset=utf-8": {
-                "examples": {
-                  "has status": {
-                    "summary": "has status",
-                    "value": {
-                      "errors": [
-                        "Not Found"
-                      ]
                     }
                   }
                 }
@@ -983,7 +1025,12 @@
             "schema": {
               "type": "number"
             },
-            "example": "838"
+            "example": "1167"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzOTEsInVpZCI6ImYzMDU0MjU4LTAwZmItNDQzNy1hNWEwLTgzNTkwODRmZDZiOSJ9.KDQD-X-uOAKG2M_-fKO19U39BEgMlj-W2T86zKO02io"
           },
           {
             "name": "Content-Type",
@@ -1013,6 +1060,51 @@
         }
       }
     },
+    "/api/v1/refresh": {
+      "post": {
+        "summary": "Refresh session",
+        "tags": [
+          "Refresh"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "X-Refresh-Token",
+            "in": "header",
+            "example": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njk5MTc3ODEsInVpZCI6IjFlM2Y1ZGJmLWJlMzItNDdlMS1hMmI0LTI4N2I0ZjI2NDYzMiJ9.zW61Jv6BDTD8fB4qV70K7EK1KWKWTPFUXY9_ii3smSI"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status success": {
+                    "summary": "has status success",
+                    "value": {
+                      "csrf": "Rx0W/QogaIS3kWWr4ZqVuuPs8QI674KOsEPc/LP7EwcTyxUFsdFbPL4ETgXO40I9k1Sr0KhxnYgUJ6nniB3eAw==",
+                      "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVpZCI6IjcwMzJmN2Q4LWU2MGUtNDE4MC04MTM2LTlhYTQ2OTJkYTgwZiJ9.v9bRCIAEEwbujY_V8wBy5wtEIIGmyFA8rXAY4rlQvX4",
+                      "access_expires_at": "2022-11-24T21:03:01.000+02:00"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/sing_in": {
       "post": {
         "summary": "Login",
@@ -1033,11 +1125,7 @@
               "examples": {
                 "has status success": {
                   "summary": "has status success",
-                  "value": "password=password&username=exercitationem"
-                },
-                "has return json with tokens": {
-                  "summary": "has return json with tokens",
-                  "value": "password=password&username=at"
+                  "value": "password=password&username=minima"
                 }
               }
             }
@@ -1052,21 +1140,11 @@
                   "has status success": {
                     "summary": "has status success",
                     "value": {
-                      "csrf": "v13pGapW23sFn8Z/psMqYNHup1yEgG0smnLO66It8Jze10C+MoM9sI6jmmS/ktRfrBb2dTZ2qu40tO2DXtK8Cw==",
-                      "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTEyOTksInVzZXJfaWQiOjE3MjUsInVpZCI6ImJiYjRkOWQ2LTgxYWYtNDJkMC1hODkwLTg5OTlhZmIwYTNmNiIsInJ1aWQiOiJhZWY1NDU0Yi0zOGU5LTRiYmEtYmJiNi03MzBlNDQ5MWVkYzIifQ.QjyUxye9ywDY_VT8I52nwL4sS7Xf4J6dWvQPZ9RiAeQ",
-                      "access_expires_at": "2022-11-24T19:34:59.000+02:00",
-                      "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njk5MTI0OTksInVpZCI6ImFlZjU0NTRiLTM4ZTktNGJiYS1iYmI2LTczMGU0NDkxZWRjMiJ9.v9R9QpHLUEhILxcE4YmmOvLaPSbjw5I1S5RC3JExLXQ",
-                      "refresh_expires_at": "2022-12-01T18:34:59.000+02:00"
-                    }
-                  },
-                  "has return json with tokens": {
-                    "summary": "has return json with tokens",
-                    "value": {
-                      "csrf": "HLarGn71CPZPdbHlhT7Epu2Fz692ojNBXbXh4z4lWJYo43OxQal88pzvdsrV2LtpNpmvC7EvlbUX7FAb/abUvg==",
-                      "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTEyOTksInVzZXJfaWQiOjE3MjYsInVpZCI6IjEzMDc3MmYzLTcwNTMtNGExNC1iYjQxLWI2MzY4YzI1YTgyNCIsInJ1aWQiOiJhMDc1NGE4My0yZGJlLTQwNjQtOGM2Yi0wMzljZWMyYTk0MGQifQ.iiY2A68T3b56BODL0nmaEigb2FecmrwLQ_Cw8DJnktk",
-                      "access_expires_at": "2022-11-24T19:34:59.000+02:00",
-                      "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njk5MTI0OTksInVpZCI6ImEwNzU0YTgzLTJkYmUtNDA2NC04YzZiLTAzOWNlYzJhOTQwZCJ9.r1ZuYC58Kdh5TXUvjx2O-j2Eya0GNoOEPsAo0gcXMLs",
-                      "refresh_expires_at": "2022-12-01T18:34:59.000+02:00"
+                      "csrf": "1DodxI80zoKeRb2rkVzz2Vxbt9XH7GHQ7ICuTn9nPO7iKtcI0UXArHWkLe7RFVWSawTv8/CKpY54CiBn1xvbqA==",
+                      "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzODEsInVpZCI6ImEzNWNhNDE4LTk4YWItNDg1MC04OTM1LWE5NTI0ZTQ4MjFiNCIsInJ1aWQiOiJmNTQ1MmM4NS1jNGEzLTRjZjEtYjU2ZS0wNmIzNDRjYjk3OWEifQ.k19Xi6DfaBDDoljB0G1Dhw2wbPXoBPlnTohJzMKFz-w",
+                      "access_expires_at": "2022-11-24T21:03:01.000+02:00",
+                      "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njk5MTc3ODEsInVpZCI6ImY1NDUyYzg1LWM0YTMtNGNmMS1iNTZlLTA2YjM0NGNiOTc5YSJ9.OKzn9kGS0rngTmN4mY45HFwqMiOfPel_DyElRZKVcYI",
+                      "refresh_expires_at": "2022-12-01T20:03:01.000+02:00"
                     }
                   }
                 }
@@ -1089,6 +1167,11 @@
         ],
         "description": "",
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzODIsInVpZCI6IjBlNGVmMWI5LTUxYWQtNGJkMy04ZmQ0LWI5YzAxOWUyZGFmNCIsInJ1aWQiOiJkM2UyYmM1OC0zZGEzLTQyZmUtOTA2My1hNTVmNTI0NjE1NzEifQ.sdQ_Nhyv0jUOCrMPdD3djZTfOmMKiZYdhY8fwbdt8Gs"
+          },
           {
             "name": "Content-Type",
             "in": "header",
@@ -1137,11 +1220,11 @@
               "examples": {
                 "has status success": {
                   "summary": "has status success",
-                  "value": "password=password&password_confirmation=password&username=repellendus"
+                  "value": "password=password&password_confirmation=password&username=illo"
                 },
                 "has return json with tokens": {
                   "summary": "has return json with tokens",
-                  "value": "password=password&password_confirmation=password&username=in"
+                  "value": "password=password&password_confirmation=password&username=non"
                 }
               }
             }
@@ -1156,21 +1239,21 @@
                   "has status success": {
                     "summary": "has status success",
                     "value": {
-                      "csrf": "lNvPUSWlYpdLCBIKiDRiH3qMLggGjAtvcbVXP+xjpebNEiPWG+PqIpTU4iMylemTAX3Z4ETyxQKRVrt8P6vsLg==",
-                      "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTEyOTksInVzZXJfaWQiOjE3MzgsInVpZCI6IjlhOWEyNzllLTFlN2MtNDQ1OC04NmIxLTYyZjBkMjIyYWIwMiIsInJ1aWQiOiJjYjFiMjA4NC1iOWQ1LTQyY2UtYWQ4Ny1lYzlkYmM4NGQwN2UifQ.vEU4IG5M6UB2xDpaP5rcHFsLw86ysnIgunlNFLHun3o",
-                      "access_expires_at": "2022-11-24T19:34:59.000+02:00",
-                      "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njk5MTI0OTksInVpZCI6ImNiMWIyMDg0LWI5ZDUtNDJjZS1hZDg3LWVjOWRiYzg0ZDA3ZSJ9.iA4qIXImLC12bRih2ti_MTe8K8ZXMX1ixF35rJHiAmg",
-                      "refresh_expires_at": "2022-12-01T18:34:59.000+02:00"
+                      "csrf": "MtJP5JjY9S4gJlU2qiM0KAezXj7GMi0EJmzB2ztqtHS8MAI2gngY+iC/2kWwLcDN+StaGMU/SaBg+2nyoH/lbQ==",
+                      "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzOTIsInVpZCI6IjZmZTZhY2I2LTczMzYtNDBkZC05ODVjLTExMTZiYjc0ZDQzOSIsInJ1aWQiOiIzOWRhNjJiOC02YWJiLTQyODItOTk1My1iNWZkYmM3ZDcyZTAifQ.wuNhFAMYSsxbnNyj9qSSLmX4nbufDmsmXNPIYJBn3wo",
+                      "access_expires_at": "2022-11-24T21:03:01.000+02:00",
+                      "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njk5MTc3ODEsInVpZCI6IjM5ZGE2MmI4LTZhYmItNDI4Mi05OTUzLWI1ZmRiYzdkNzJlMCJ9.Qt2BgAEca_XP6kueWkr2fRzHx7t_ZbpcGG8dsML1SjI",
+                      "refresh_expires_at": "2022-12-01T20:03:01.000+02:00"
                     }
                   },
                   "has return json with tokens": {
                     "summary": "has return json with tokens",
                     "value": {
-                      "csrf": "dFXIAr355didB8Cst6qs5ychc/VrsEJzjCOelLXC1YorvxRGR5D7qXZOXcjvEHiPLh66DoMX2mdaBd6qoEBSyw==",
-                      "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTEyOTksInVzZXJfaWQiOjE3MzksInVpZCI6IjI1MTAzYmJkLWE2MTItNGMwNi1iNWM5LTRjZjQ5NTI5OWNiMSIsInJ1aWQiOiI2ZGMwN2ZmOS01MDcwLTRlZjMtOTg4Yi0wYzBmYjIyM2EwYmMifQ.4HqN8Nj0DMuogj6BtEQMRiIHOfBzMrnBNelwYP1ks9w",
-                      "access_expires_at": "2022-11-24T19:34:59.000+02:00",
-                      "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njk5MTI0OTksInVpZCI6IjZkYzA3ZmY5LTUwNzAtNGVmMy05ODhiLTBjMGZiMjIzYTBiYyJ9.B_2h_FWlKMW3BEs523cmbBQcWsMXeOdCdnype2eVALQ",
-                      "refresh_expires_at": "2022-12-01T18:34:59.000+02:00"
+                      "csrf": "s9zSY3yCkAP/W2VJqeV3POg1QJJpIRc7Us8/i7+ryQ8maPGjGrhYc0hBIMXhf+HnQPR8TNRLvkzu40RhP8tJmQ==",
+                      "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzOTMsInVpZCI6IjJkNmNjYzUyLWNjMGYtNGUxNy05YTcyLTFhMDlhOTgzMjA1ZiIsInJ1aWQiOiI3MWYyZmI4ZS00NjNjLTRlOTctODYzMi1hNzg4MTUzYzE0MzcifQ.HAj7hwkGQWk0QmC4huIQnArQM3hCxCLtu6WsFq9-fhI",
+                      "access_expires_at": "2022-11-24T21:03:01.000+02:00",
+                      "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njk5MTc3ODEsInVpZCI6IjcxZjJmYjhlLTQ2M2MtNGU5Ny04NjMyLWE3ODgxNTNjMTQzNyJ9.h-jWKiatWyXRzPzkkxmuYGoeG3gDpN1YEcEWXkJT_2I",
+                      "refresh_expires_at": "2022-12-01T20:03:01.000+02:00"
                     }
                   }
                 }
@@ -1188,15 +1271,19 @@
   },
   "tags": [
     {
-      "name": "Projects",
-      "description": ""
-    },
-    {
       "name": "Comment",
       "description": ""
     },
     {
+      "name": "Projects",
+      "description": ""
+    },
+    {
       "name": "Tasks",
+      "description": ""
+    },
+    {
+      "name": "Refresh",
       "description": ""
     },
     {
@@ -1212,19 +1299,15 @@
     {
       "name": "Projects",
       "tags": [
-        "Projects"
-      ]
-    },
-    {
-      "name": "Tasks",
-      "tags": [
         "Comment",
+        "Projects",
         "Tasks"
       ]
     },
     {
       "name": "Users",
       "tags": [
+        "Refresh",
         "Sessions",
         "Users"
       ]

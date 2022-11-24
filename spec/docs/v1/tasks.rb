@@ -6,11 +6,11 @@ module Docs
       document :api do
         resource 'Tasks' do
           endpoint '/tasks'
-          group 'Tasks'
+          group 'Projects'
         end
 
-        group 'Tasks' do
-          desc 'Tasks group'
+        group 'Projects' do
+          desc 'Projects group'
         end
       end
 
