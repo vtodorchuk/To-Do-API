@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
-  MAX_BODY_LENGTH = 500
+  MAX_BODY_LENGTH = 256
   MAX_BYTE_SIZE = 10.megabytes
   ACCEPTED_TYPES = %w[image/jpeg image/png].freeze
 

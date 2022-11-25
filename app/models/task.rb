@@ -16,4 +16,8 @@ class Task < ApplicationRecord
 
     errors.add(:deadline, 'must be possible')
   end
+
+  def deadline_at
+    deadline.strftime('%D/%M/%Y')
+  end
 end
