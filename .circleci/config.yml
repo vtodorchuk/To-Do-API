@@ -16,7 +16,7 @@ executors:
           password: $DOCKERHUB_PASSWORD
         environment:
           POSTGRES_USER: postgres
-          POSTGRES_DB: to_do_api_test
+          POSTGRES_DB: to_do_test
       - image: cimg/redis:6.2.6
 
 cashes:
