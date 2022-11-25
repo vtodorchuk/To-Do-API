@@ -47,3 +47,6 @@ Style/ClassAndModuleChildren:
 
 Lint/UnreachableCode:
   Enabled: false
+
+RSpec/ImplicitSubject:
+  Enabled: false

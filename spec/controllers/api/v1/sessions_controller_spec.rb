@@ -21,7 +21,8 @@ describe Api::V1::SessionsController, type: :controller do
 
     context 'when unsuccessful' do
       before do
-        post :create, params: { username: FFaker::Lorem.word, password: 'wrong_password' }
+        post :create,
+             params: { username: FFaker::Lorem.characters(User::MIN_USERNAME_LENGTH.next), password: 'wrong_password' }
       end
 
       it 'has status unauthorized' do

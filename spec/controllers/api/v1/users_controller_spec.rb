@@ -6,7 +6,7 @@ describe Api::V1::UsersController do
     context 'when success' do
       include Docs::V1::Sessions::Create
       before do
-        post :create, params: { username: FFaker::Lorem.word,
+        post :create, params: { username: FFaker::Lorem.characters(User::MIN_USERNAME_LENGTH.next),
                                 password: 'password',
                                 password_confirmation: 'password' }
       end
