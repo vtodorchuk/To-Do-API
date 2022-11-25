@@ -1,10 +1,10 @@
 module Docs
   module V1
-    module Sessions
+    module Refresh
       extend Dox::DSL::Syntax
 
       document :api do
-        resource 'Sessions' do
+        resource 'Refresh' do
           group 'Users'
         end
 
@@ -14,11 +14,7 @@ module Docs
       end
 
       document :create do
-        action 'Get sessions tokens'
-      end
-
-      document :destroy do
-        action 'Delete sessions tokens'
+        action 'Refresh session'
       end
     end
   end
