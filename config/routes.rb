@@ -4,9 +4,7 @@ Rails.application.routes.draw do
       resources :users, only: %i[create destroy]
       resources :refresh, only: :create
 
-      delete 'sing_out/destroy_by_refresh', to: 'sessions#destroy_by_refresh'
-      post 'sing_in', to: 'sessions#create'
-      delete 'sing_out', to: 'sessions#destroy'
+      resource :session, only: %i[create destroy]
     end
   end
 end

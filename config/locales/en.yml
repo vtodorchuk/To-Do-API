@@ -17,3 +17,7 @@ en:
         success: 'Goodbye, Hope to see you soon!'
     errors:
       something_not_right: 'Somethings not right here!'
+  errors:
+    not_found: 'Not Found!'
+    project_exist: 'Project Exists'
+

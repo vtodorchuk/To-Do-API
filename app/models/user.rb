@@ -10,7 +10,7 @@ class User < ApplicationRecord
                        format: { with: PASSWORD_FORMAT,
                                  message: 'Password length should be 8 characters, alphanumeric.' }
 
-  def valid_password?(confirmation_password)
-    password.match(confirmation_password)
+  def valid_password?(param_password)
+    password.match(param_password)
   end
 end

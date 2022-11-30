@@ -14,10 +14,8 @@ class Api::V1::SessionsController < ApplicationController
   def destroy
     result = V1::Session::Operation::Destroy.call(payload: payload)
 
-    if result.success?
-      render status: :ok
-    else
-      render status: :not_found
-    end
+    return render status: :ok if result.success?
+
+    render status: :not_found
   end
 end

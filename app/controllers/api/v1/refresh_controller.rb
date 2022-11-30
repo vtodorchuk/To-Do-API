@@ -3,6 +3,7 @@ class Api::V1::RefreshController < ApplicationController
 
   def create
     session = JWTSessions::Session.new(payload: payload)
+
     render json: session.refresh(found_token)
   end
 end
