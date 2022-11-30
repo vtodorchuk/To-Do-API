@@ -1,5 +1,8 @@
 class V1::Task::Operation::Create < Trailblazer::Operation
-  step :find_project
+  step :find_project,
+       Output(Trailblazer::Activity::Left, :failure) => Path(end_id: 'End.failure', end_task: End(:with_failure)) do
+    step :not_found
+  end
   step :initialize_task
   step :save_task
 
@@ -17,13 +20,13 @@ class V1::Task::Operation::Create < Trailblazer::Operation
     task.save
   end
 
-  def add_errors(ctx, **)
-    if ctx[:task]
-      ctx[:errors] = ctx[:task].errors.full_messages
-      ctx[:status] = :unprocessable_entity
-    else
-      ctx[:errors] = ['Not Found']
-      ctx[:status] = :not_found
-    end
+  def add_errors(ctx, task:, **)
+    ctx[:errors] = task.errors.full_messages
+    ctx[:status] = :unprocessable_entity
+  end
+
+  def not_found(ctx, **)
+    ctx[:errors] = ['Not Found']
+    ctx[:status] = :not_found
   end
 end

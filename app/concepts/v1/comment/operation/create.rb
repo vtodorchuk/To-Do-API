@@ -1,5 +1,8 @@
 class V1::Comment::Operation::Create < Trailblazer::Operation
-  step :find_task
+  step :find_task,
+       Output(Trailblazer::Activity::Left, :failure) => Path(end_id: 'End.failure', end_task: End(:with_failure)) do
+    step :not_found
+  end
   step :initialize_comment
   step :save_comment
 
@@ -17,13 +20,13 @@ class V1::Comment::Operation::Create < Trailblazer::Operation
     comment.save
   end
 
-  def add_errors(ctx, **)
-    if ctx[:comment]
-      ctx[:errors] = ctx[:comment].errors.full_messages
-      ctx[:status] = :unprocessable_entity
-    else
-      ctx[:errors] = ['Not Found']
-      ctx[:status] = :not_found
-    end
+  def add_errors(ctx, comment:, **)
+    ctx[:errors] = comment.errors.full_messages
+    ctx[:status] = :unprocessable_entity
+  end
+
+  def not_found(ctx, **)
+    ctx[:errors] = ['Not Found']
+    ctx[:status] = :not_found
   end
 end
