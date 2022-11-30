@@ -16,7 +16,6 @@ describe Api::V1::ProjectsController, api: true, type: :controller do
     include Docs::V1::Projects::Index
     context 'when success' do
       before do
-        project
         request.headers[JWTSessions.access_header] = access_token
       end
 
@@ -46,7 +45,7 @@ describe Api::V1::ProjectsController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it 'has status', :dox do
+      it 'has status' do
         get :show, params: { id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end
@@ -61,7 +60,7 @@ describe Api::V1::ProjectsController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        get :create, params: { name: new_name }
+        post :create, params: { name: new_name }
         expect(response).to have_http_status(:created)
       end
     end
@@ -71,8 +70,8 @@ describe Api::V1::ProjectsController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it 'has status', :dox do
-        get :create
+      it 'has status' do
+        post :create
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -102,7 +101,7 @@ describe Api::V1::ProjectsController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it 'has status', :dox do
+      it 'has status' do
         put :update, params: { id: rand(0...12) }
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -118,7 +117,7 @@ describe Api::V1::ProjectsController, api: true, type: :controller do
       end
 
       it 'has status', :dox do
-        get :destroy, params: { id: project.id }
+        delete :destroy, params: { id: project.id }
         expect(response).to have_http_status(:ok)
       end
     end
@@ -128,8 +127,8 @@ describe Api::V1::ProjectsController, api: true, type: :controller do
         request.headers[JWTSessions.access_header] = access_token
       end
 
-      it 'has status', :dox do
-        get :destroy, params: { id: rand(0..10) }
+      it 'has status' do
+        delete :destroy, params: { id: rand(0..10) }
         expect(response).to have_http_status(:not_found)
       end
     end

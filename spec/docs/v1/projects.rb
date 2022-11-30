@@ -15,11 +15,11 @@ module Docs
       end
 
       document :index do
-        action 'Get project'
+        action 'Get all projects for current_user'
       end
 
       document :update do
-        action 'Get project'
+        action 'Update project'
       end
 
       document :show do

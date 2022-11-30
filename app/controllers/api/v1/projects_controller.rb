@@ -1,7 +1,7 @@
 class Api::V1::ProjectsController < ApplicationController
   before_action :authorize_access_request!
   def index
-    result = V1::Project::Operation::Index.call(current_user: current_user)
+    result = V1::Project::Operation::Index.call(current_user: current_user, params: params)
 
     render json: V1::ProjectSerializer.new(result[:projects]), status: :found
   end
