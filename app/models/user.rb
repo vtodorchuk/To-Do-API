@@ -5,6 +5,8 @@ class User < ApplicationRecord
   MIN_PASSWORD_LENGTH = 8
   PASSWORD_FORMAT = /[a-zA-Z]*/.freeze
 
+  has_many :projects, dependent: :destroy
+
   validates :username, allow_blank: false, length: { minimum: MIN_USERNAME_LENGTH, maximum: MAX_USERNAME_LENGTH }
   validates :password, allow_blank: false, length: { minimum: MIN_PASSWORD_LENGTH },
                        format: { with: PASSWORD_FORMAT,

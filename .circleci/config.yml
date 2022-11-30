@@ -13,10 +13,10 @@ executors:
       - image: cimg/postgres:14.0
         auth:
           username: postgres
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD
         environment:
           POSTGRES_USER: postgres
-          POSTGRES_DB: to_do_api_test
+          POSTGRES_DB: to_do_test
       - image: cimg/redis:6.2.6
 
 cashes:
@@ -44,14 +44,14 @@ commands:
       - run: sudo apt install -y postgresql-client || true
 
   run_rubocop:
-    description: command to start rubocop
+    description: comment to start rubocop
     steps:
       - run:
           name: rubocop
           command: bundle exec rubocop
 
   run_fasterer:
-    description: command to start fasterer
+    description: comment to start fasterer
     steps:
       - attach_workspace:
           at: ~/
@@ -60,7 +60,7 @@ commands:
           command: bundle exec fasterer
 
   run_rspec:
-    description: command to start specs
+    description: comment to start specs
     steps:
       - run:
           name: specs

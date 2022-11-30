@@ -14,11 +14,11 @@ module Docs
       end
 
       document :create do
-        action 'Get sessions tokens'
+        action 'Login'
       end
 
       document :destroy do
-        action 'Delete sessions tokens'
+        action 'Logout'
       end
     end
   end

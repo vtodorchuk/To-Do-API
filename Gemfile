@@ -3,10 +3,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.10'
 
+gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'jsonapi-serializer'
 gem 'jwt', '~> 2.2', '>= 2.2.1'
 gem 'jwt_sessions', '~> 2.7', '>= 2.7.4'
+gem 'kaminari'
 gem 'pg', '~> 1.1'
 gem 'pry', '~> 0.13.1'
 gem 'puma', '~> 5.0'
@@ -17,7 +19,6 @@ gem 'trailblazer-rails'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'dox', require: false
   gem 'factory_bot_rails', '~> 6.2'
   gem 'fasterer', '~> 0.10.0'
   gem 'ffaker', '~> 2.21'
@@ -33,6 +34,7 @@ group :development do
 end
 
 group :test do
+  gem 'dox', require: false
   gem 'rspec', '~> 3.12'
   gem 'rspec-rails', '~> 5.1', '>= 5.1.2'
   gem 'shoulda-matchers', '~> 5.0'

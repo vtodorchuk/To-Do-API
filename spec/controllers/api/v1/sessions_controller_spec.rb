@@ -1,15 +1,15 @@
-describe Api::V1::SessionsController, type: :controller do
+describe Api::V1::SessionsController, api: true, type: :controller do
   include Docs::V1::Sessions::Api
   let(:user) { create(:user) }
 
   describe 'POST create' do
+    include Docs::V1::Sessions::Create
     context 'when success' do
-      include Docs::V1::Sessions::Create
       before do
         post :create, params: { username: user.username, password: user.password }
       end
 
-      it 'has status success' do
+      it 'has status success', :dox do
         expect(response).to have_http_status(:created)
       end
 
@@ -36,23 +36,19 @@ describe Api::V1::SessionsController, type: :controller do
   end
 
   describe 'DELETE destroy' do
+    include Docs::V1::Sessions::Destroy
     context 'when success' do
-      include Docs::V1::Sessions::Destroy
       before do
         payload = { user_id: user.id }
         session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
         tokens = session.login
         request.headers[JWTSessions.access_header] = "Bearer #{tokens[:access]}"
         request.headers[JWTSessions.csrf_header] = tokens[:csrf]
+      end
+
+      it 'has status success', :dox do
         delete :destroy
-      end
-
-      it 'has status success' do
         expect(response).to have_http_status(:ok)
-      end
-
-      it 'has return json with tokens' do
-        expect(response.body).to eq(' ')
       end
     end
   end

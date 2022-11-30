@@ -1,0 +1,1316 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API",
+    "description": "# To-Do API\n\nThis is api for To-Do web applications. \nThis api implemented projects, tasks and comments. \nYou can easy manage tasks, prioritize them and \n",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/v1/tasks/{task_id}/comments": {
+      "get": {
+        "summary": "Get all comments for task",
+        "tags": [
+          "Comment"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1154"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODAsInVzZXJfaWQiOjIzNjksInVpZCI6IjUzZDJkZDUyLWUyOTktNGZhYS1hNzBjLWM4NDY4NGZkMjkxZCJ9.0d2530oFfGhlSmbvgTghqkFmPk81swZr5KgI0t6hHQU"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Found",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": null
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an comment",
+        "tags": [
+          "Comment"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1156"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODAsInVzZXJfaWQiOjIzNzEsInVpZCI6IjAzN2JkOGE3LTUyM2ItNDM4MC1iMDM4LWRiNTdmMGQ1ZTIzNSJ9.lFpK3GEKMLICEjP-_HDtq0I50oElaCZ60zBuBP5OqW8"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "any": {
+              "examples": {
+                "has status": {
+                  "summary": "has status",
+                  "value": "body=Velit+necessitatibus+tempora+exercitationem+quod+repudiandae+unde+dignissimos+voluptatum."
+                },
+                "has image": {
+                  "summary": "has image",
+                  "value": "{\n  \"body\": \"Ad architecto quidem enim itaque iste.\",\n  \"image\": {\n    \"filename\": \"test_picture.png\",\n    \"type\": \"image/png\",\n    \"name\": \"image\",\n    \"tempfile\": \"#<File:0x00007f8eb2424760>\",\n    \"head\": \"content-disposition: form-data; name=\\\"image\\\"; filename=\\\"test_picture.png\\\"\\r\\ncontent-type: image/png\\r\\ncontent-length: 1267036\\r\\n\"\n  }\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": {
+                        "id": "344",
+                        "type": "comment",
+                        "attributes": {
+                          "id": 344,
+                          "body": "Velit necessitatibus tempora exercitationem quod repudiandae unde dignissimos voluptatum.",
+                          "image_url": null
+                        },
+                        "relationships": {
+                          "task": {
+                            "data": {
+                              "id": "1156",
+                              "type": "task"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "has image": {
+                    "summary": "has image",
+                    "value": {
+                      "data": {
+                        "id": "345",
+                        "type": "comment",
+                        "attributes": {
+                          "id": 345,
+                          "body": "Ad architecto quidem enim itaque iste.",
+                          "image_url": "http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBIUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--b88c743dae712f62bd6b89b046403309c283a101/test_picture.png"
+                        },
+                        "relationships": {
+                          "task": {
+                            "data": {
+                              "id": "1157",
+                              "type": "task"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/comments/{id}": {
+      "get": {
+        "summary": "Get an comment",
+        "tags": [
+          "Comment"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "343"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODAsInVzZXJfaWQiOjIzNzAsInVpZCI6IjIxNjIzYTY4LWIzM2UtNGUzZC1hYzY1LWI3Njc3ZTdmZjkwMiJ9.vqKp17j9pyuQUQNBL3KE8KF-AaJy8WlsmYLb0kSDu1A"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Found",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": {
+                        "id": "343",
+                        "type": "comment",
+                        "attributes": {
+                          "id": 343,
+                          "body": "Eligendi adipisci sint iste debitis repellendus blanditiis laudantium facere.",
+                          "image_url": null
+                        },
+                        "relationships": {
+                          "task": {
+                            "data": {
+                              "id": "1155",
+                              "type": "task"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an comment",
+        "tags": [
+          "Comment"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "346"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzNzMsInVpZCI6ImEwY2UyMWNiLTkwYTAtNDUwMy1iMmE2LTg3NTQzMzZiYzM4ZCJ9.mbv3z1KNviLwR9ke-52BWv05ZTJaQQG7kJw4mvw70Lg"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain; charset=utf-8": {
+                "examples": {
+                  "delete comment": {
+                    "summary": "delete comment",
+                    "value": " "
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "text/plain; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects": {
+      "get": {
+        "summary": "Get all projects for current_user",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzNzQsInVpZCI6IjIxYWJjZjAwLWQ3MjAtNGUzMi05MGJlLWI1NWU5MjA5MjlmOSJ9.Jcf9-xjwG8R88XADUK1yXjuD8HuTz8iqCimPl8oZYcc"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Found",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": [
+
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an project",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzNzYsInVpZCI6Ijk1NWYwN2VkLWJmNGUtNGI2Mi1hZjc5LWU1NTkzOWY0MTEwOSJ9.czusbt0fZYCJjKpnTHZtSCPu5e_f5cqW9gQuQsCwBbA"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "any": {
+              "examples": {
+                "has status": {
+                  "summary": "has status",
+                  "value": "name=beatae"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": {
+                        "id": "1583",
+                        "type": "project",
+                        "attributes": {
+                          "id": 1583,
+                          "name": "beatae"
+                        },
+                        "relationships": {
+                          "user": {
+                            "data": {
+                              "id": "2376",
+                              "type": "user"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{id}": {
+      "get": {
+        "summary": "Get an project",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1582"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzNzUsInVpZCI6IjgyYWRhNjYyLWY5NTQtNDFiMC05ZWEzLWFjZjRkNTNjNGZiZSJ9.hIzn24o9z4apGijXzTbPfqj112xlZ6CKZ4TjCek-U2Q"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Found",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": {
+                        "id": "1582",
+                        "type": "project",
+                        "attributes": {
+                          "id": 1582,
+                          "name": "accusamus"
+                        },
+                        "relationships": {
+                          "user": {
+                            "data": {
+                              "id": "2375",
+                              "type": "user"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update project",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1584"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzNzcsInVpZCI6Ijc4ZDZiYTZiLTBhZGYtNGJiZS05NjViLTUxMDc4NzcwYWNmOSJ9.8Tw9_aREayIKFaVJciSFT1TKN4NSZsNBbIm-HbRygLw"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "any": {
+              "examples": {
+                "has status": {
+                  "summary": "has status",
+                  "value": "name=quia"
+                },
+                "update projects": {
+                  "summary": "update projects",
+                  "value": "name=sit"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": {
+                        "id": "1584",
+                        "type": "project",
+                        "attributes": {
+                          "id": 1584,
+                          "name": "quia"
+                        },
+                        "relationships": {
+                          "user": {
+                            "data": {
+                              "id": "2377",
+                              "type": "user"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "update projects": {
+                    "summary": "update projects",
+                    "value": {
+                      "data": {
+                        "id": "1585",
+                        "type": "project",
+                        "attributes": {
+                          "id": 1585,
+                          "name": "sit"
+                        },
+                        "relationships": {
+                          "user": {
+                            "data": {
+                              "id": "2378",
+                              "type": "user"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an project",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1586"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzNzksInVpZCI6Ijc0MmZkYWI5LThlOGItNDBhYi05MjU3LTYwYzlmMzNlMzM5MSJ9.i6UISP7el0S0Kbc8XqVMKvn1ZlIKR_X8Aq7QW4pZLhk"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": " "
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "text/plain; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{project_id}/tasks": {
+      "get": {
+        "summary": "Get all tasks",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1587"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzODMsInVpZCI6IjI2ZGI0NDhlLWM2MTMtNDA2Ny1hNzhiLThmNTQzOGEwZGRhNCJ9.Qhpz4gszwTm4gJbtrLJ7Q77PPQ5Do4_JaSUNaCJCM5g"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Found",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "1159",
+                          "type": "task",
+                          "attributes": {
+                            "id": 1159,
+                            "title": "laboriosam",
+                            "deadline": "2022-12-03T18:03:01.494Z",
+                            "completed": false
+                          },
+                          "relationships": {
+                            "project": {
+                              "data": {
+                                "id": "1587",
+                                "type": "project"
+                              }
+                            },
+                            "comments": {
+                              "data": [
+
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a task",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1589"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzODUsInVpZCI6IjA3OTE3NzUwLTY0YTEtNDA1YS1iYWVjLTUzZjYyMjBmZWMyMCJ9.HjsOtcgfyEY2KqPjprQvXwNuk0kxZMyS1V_JGcNQ1MA"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "any": {
+              "examples": {
+                "has status": {
+                  "summary": "has status",
+                  "value": "deadline=2022-12-22T20%3A03%3A01%2B02%3A00&title=facilis"
+                },
+                "has json": {
+                  "summary": "has json",
+                  "value": "deadline=2022-12-03T20%3A03%3A01%2B02%3A00&title=architecto"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": {
+                        "id": "1161",
+                        "type": "task",
+                        "attributes": {
+                          "id": 1161,
+                          "title": "facilis",
+                          "deadline": "2022-12-22T18:03:01.000Z",
+                          "completed": false
+                        },
+                        "relationships": {
+                          "project": {
+                            "data": {
+                              "id": "1589",
+                              "type": "project"
+                            }
+                          },
+                          "comments": {
+                            "data": [
+
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "has json": {
+                    "summary": "has json",
+                    "value": {
+                      "data": {
+                        "id": "1162",
+                        "type": "task",
+                        "attributes": {
+                          "id": 1162,
+                          "title": "architecto",
+                          "deadline": "2022-12-03T18:03:01.000Z",
+                          "completed": false
+                        },
+                        "relationships": {
+                          "project": {
+                            "data": {
+                              "id": "1590",
+                              "type": "project"
+                            }
+                          },
+                          "comments": {
+                            "data": [
+
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tasks/{id}": {
+      "get": {
+        "summary": "Get a task",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1160"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzODQsInVpZCI6IjQzMjQ2ODI5LTlmZjMtNDA2ZC1hMjY0LTk2MzY0MTg2NGFkNCJ9.dpAKGMuDQAtKR7ZrEnW_6wVrfffDIasApYSBNw4SxHo"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Found",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": {
+                        "id": "1160",
+                        "type": "task",
+                        "attributes": {
+                          "id": 1160,
+                          "title": "exercitationem",
+                          "deadline": "2022-12-17T18:03:01.526Z",
+                          "completed": false
+                        },
+                        "relationships": {
+                          "project": {
+                            "data": {
+                              "id": "1588",
+                              "type": "project"
+                            }
+                          },
+                          "comments": {
+                            "data": [
+
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a task",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1163"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzODcsInVpZCI6IjJhNzViN2Q3LWQ5Y2UtNDgxMy1hYTY0LWI0Mzg2ZDk2N2UzNCJ9.rJ78ALv6ScDoid_cqYPL2HDl1WH8u-uBzf1y2UDNn9E"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "any": {
+              "examples": {
+                "has status": {
+                  "summary": "has status",
+                  "value": "title=unde"
+                },
+                "change title": {
+                  "summary": "change title",
+                  "value": "title=culpa"
+                },
+                "change position": {
+                  "summary": "change position",
+                  "value": "position=1"
+                },
+                "change completed": {
+                  "summary": "change completed",
+                  "value": "completed=true"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status": {
+                    "summary": "has status",
+                    "value": {
+                      "data": {
+                        "id": "1163",
+                        "type": "task",
+                        "attributes": {
+                          "id": 1163,
+                          "title": "unde",
+                          "deadline": "2022-12-04T18:03:01.604Z",
+                          "completed": false
+                        },
+                        "relationships": {
+                          "project": {
+                            "data": {
+                              "id": "1591",
+                              "type": "project"
+                            }
+                          },
+                          "comments": {
+                            "data": [
+
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "change title": {
+                    "summary": "change title",
+                    "value": {
+                      "data": {
+                        "id": "1164",
+                        "type": "task",
+                        "attributes": {
+                          "id": 1164,
+                          "title": "culpa",
+                          "deadline": "2022-12-11T18:03:01.633Z",
+                          "completed": false
+                        },
+                        "relationships": {
+                          "project": {
+                            "data": {
+                              "id": "1592",
+                              "type": "project"
+                            }
+                          },
+                          "comments": {
+                            "data": [
+
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "change position": {
+                    "summary": "change position",
+                    "value": {
+                      "data": {
+                        "id": "1165",
+                        "type": "task",
+                        "attributes": {
+                          "id": 1165,
+                          "title": "unde",
+                          "deadline": "2022-11-26T18:03:01.658Z",
+                          "completed": false
+                        },
+                        "relationships": {
+                          "project": {
+                            "data": {
+                              "id": "1593",
+                              "type": "project"
+                            }
+                          },
+                          "comments": {
+                            "data": [
+
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "change completed": {
+                    "summary": "change completed",
+                    "value": {
+                      "data": {
+                        "id": "1166",
+                        "type": "task",
+                        "attributes": {
+                          "id": 1166,
+                          "title": "excepturi",
+                          "deadline": "2022-11-28T18:03:01.684Z",
+                          "completed": true
+                        },
+                        "relationships": {
+                          "project": {
+                            "data": {
+                              "id": "1594",
+                              "type": "project"
+                            }
+                          },
+                          "comments": {
+                            "data": [
+
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a task",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1167"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzOTEsInVpZCI6ImYzMDU0MjU4LTAwZmItNDQzNy1hNWEwLTgzNTkwODRmZDZiOSJ9.KDQD-X-uOAKG2M_-fKO19U39BEgMlj-W2T86zKO02io"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain; charset=utf-8": {
+                "examples": {
+                  "destroy task": {
+                    "summary": "destroy task",
+                    "value": " "
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "text/plain; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/refresh": {
+      "post": {
+        "summary": "Refresh session",
+        "tags": [
+          "Refresh"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "X-Refresh-Token",
+            "in": "header",
+            "example": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njk5MTc3ODEsInVpZCI6IjFlM2Y1ZGJmLWJlMzItNDdlMS1hMmI0LTI4N2I0ZjI2NDYzMiJ9.zW61Jv6BDTD8fB4qV70K7EK1KWKWTPFUXY9_ii3smSI"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status success": {
+                    "summary": "has status success",
+                    "value": {
+                      "csrf": "Rx0W/QogaIS3kWWr4ZqVuuPs8QI674KOsEPc/LP7EwcTyxUFsdFbPL4ETgXO40I9k1Sr0KhxnYgUJ6nniB3eAw==",
+                      "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVpZCI6IjcwMzJmN2Q4LWU2MGUtNDE4MC04MTM2LTlhYTQ2OTJkYTgwZiJ9.v9bRCIAEEwbujY_V8wBy5wtEIIGmyFA8rXAY4rlQvX4",
+                      "access_expires_at": "2022-11-24T21:03:01.000+02:00"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sing_in": {
+      "post": {
+        "summary": "Login",
+        "tags": [
+          "Sessions"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "any": {
+              "examples": {
+                "has status success": {
+                  "summary": "has status success",
+                  "value": "password=password&username=minima"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status success": {
+                    "summary": "has status success",
+                    "value": {
+                      "csrf": "1DodxI80zoKeRb2rkVzz2Vxbt9XH7GHQ7ICuTn9nPO7iKtcI0UXArHWkLe7RFVWSawTv8/CKpY54CiBn1xvbqA==",
+                      "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzODEsInVpZCI6ImEzNWNhNDE4LTk4YWItNDg1MC04OTM1LWE5NTI0ZTQ4MjFiNCIsInJ1aWQiOiJmNTQ1MmM4NS1jNGEzLTRjZjEtYjU2ZS0wNmIzNDRjYjk3OWEifQ.k19Xi6DfaBDDoljB0G1Dhw2wbPXoBPlnTohJzMKFz-w",
+                      "access_expires_at": "2022-11-24T21:03:01.000+02:00",
+                      "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njk5MTc3ODEsInVpZCI6ImY1NDUyYzg1LWM0YTMtNGNmMS1iNTZlLTA2YjM0NGNiOTc5YSJ9.OKzn9kGS0rngTmN4mY45HFwqMiOfPel_DyElRZKVcYI",
+                      "refresh_expires_at": "2022-12-01T20:03:01.000+02:00"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sing_out": {
+      "delete": {
+        "summary": "Logout",
+        "tags": [
+          "Sessions"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "example": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzODIsInVpZCI6IjBlNGVmMWI5LTUxYWQtNGJkMy04ZmQ0LWI5YzAxOWUyZGFmNCIsInJ1aWQiOiJkM2UyYmM1OC0zZGEzLTQyZmUtOTA2My1hNTVmNTI0NjE1NzEifQ.sdQ_Nhyv0jUOCrMPdD3djZTfOmMKiZYdhY8fwbdt8Gs"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain; charset=utf-8": {
+                "examples": {
+                  "has status success": {
+                    "summary": "has status success",
+                    "value": " "
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "text/plain; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users": {
+      "post": {
+        "summary": "Login",
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "any": {
+              "examples": {
+                "has status success": {
+                  "summary": "has status success",
+                  "value": "password=password&password_confirmation=password&username=illo"
+                },
+                "has return json with tokens": {
+                  "summary": "has return json with tokens",
+                  "value": "password=password&password_confirmation=password&username=non"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "has status success": {
+                    "summary": "has status success",
+                    "value": {
+                      "csrf": "MtJP5JjY9S4gJlU2qiM0KAezXj7GMi0EJmzB2ztqtHS8MAI2gngY+iC/2kWwLcDN+StaGMU/SaBg+2nyoH/lbQ==",
+                      "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzOTIsInVpZCI6IjZmZTZhY2I2LTczMzYtNDBkZC05ODVjLTExMTZiYjc0ZDQzOSIsInJ1aWQiOiIzOWRhNjJiOC02YWJiLTQyODItOTk1My1iNWZkYmM3ZDcyZTAifQ.wuNhFAMYSsxbnNyj9qSSLmX4nbufDmsmXNPIYJBn3wo",
+                      "access_expires_at": "2022-11-24T21:03:01.000+02:00",
+                      "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njk5MTc3ODEsInVpZCI6IjM5ZGE2MmI4LTZhYmItNDI4Mi05OTUzLWI1ZmRiYzdkNzJlMCJ9.Qt2BgAEca_XP6kueWkr2fRzHx7t_ZbpcGG8dsML1SjI",
+                      "refresh_expires_at": "2022-12-01T20:03:01.000+02:00"
+                    }
+                  },
+                  "has return json with tokens": {
+                    "summary": "has return json with tokens",
+                    "value": {
+                      "csrf": "s9zSY3yCkAP/W2VJqeV3POg1QJJpIRc7Us8/i7+ryQ8maPGjGrhYc0hBIMXhf+HnQPR8TNRLvkzu40RhP8tJmQ==",
+                      "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjkzMTY1ODEsInVzZXJfaWQiOjIzOTMsInVpZCI6IjJkNmNjYzUyLWNjMGYtNGUxNy05YTcyLTFhMDlhOTgzMjA1ZiIsInJ1aWQiOiI3MWYyZmI4ZS00NjNjLTRlOTctODYzMi1hNzg4MTUzYzE0MzcifQ.HAj7hwkGQWk0QmC4huIQnArQM3hCxCLtu6WsFq9-fhI",
+                      "access_expires_at": "2022-11-24T21:03:01.000+02:00",
+                      "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njk5MTc3ODEsInVpZCI6IjcxZjJmYjhlLTQ2M2MtNGU5Ny04NjMyLWE3ODgxNTNjMTQzNyJ9.h-jWKiatWyXRzPzkkxmuYGoeG3gDpN1YEcEWXkJT_2I",
+                      "refresh_expires_at": "2022-12-01T20:03:01.000+02:00"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Comment",
+      "description": ""
+    },
+    {
+      "name": "Projects",
+      "description": ""
+    },
+    {
+      "name": "Tasks",
+      "description": ""
+    },
+    {
+      "name": "Refresh",
+      "description": ""
+    },
+    {
+      "name": "Sessions",
+      "description": ""
+    },
+    {
+      "name": "Users",
+      "description": ""
+    }
+  ],
+  "x-tagGroups": [
+    {
+      "name": "Projects",
+      "tags": [
+        "Comment",
+        "Projects",
+        "Tasks"
+      ]
+    },
+    {
+      "name": "Users",
+      "tags": [
+        "Refresh",
+        "Sessions",
+        "Users"
+      ]
+    }
+  ]
+}
