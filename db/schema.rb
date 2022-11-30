@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 2022_11_24_194216) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "unique_project_name", unique: true
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
