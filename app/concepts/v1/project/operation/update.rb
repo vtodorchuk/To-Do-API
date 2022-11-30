@@ -19,6 +19,6 @@ class V1::Project::Operation::Update < Trailblazer::Operation
   end
 
   def not_found(ctx, **)
-    ctx[:errors] = 'Not Found'
+    ctx[:errors] = [I18n.t('errors.not_found')]
   end
 end

@@ -26,7 +26,7 @@ class V1::Comment::Operation::Create < Trailblazer::Operation
   end
 
   def not_found(ctx, **)
-    ctx[:errors] = ['Not Found']
+    ctx[:errors] = [I18n.t('errors.not_found')]
     ctx[:status] = :not_found
   end
 end

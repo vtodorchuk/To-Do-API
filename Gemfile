@@ -8,6 +8,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'jsonapi-serializer'
 gem 'jwt', '~> 2.2', '>= 2.2.1'
 gem 'jwt_sessions', '~> 2.7', '>= 2.7.4'
+gem 'kaminari'
 gem 'pg', '~> 1.1'
 gem 'pry', '~> 0.13.1'
 gem 'puma', '~> 5.0'
