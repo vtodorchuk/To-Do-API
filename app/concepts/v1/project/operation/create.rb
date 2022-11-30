@@ -8,11 +8,12 @@ class V1::Project::Operation::Create < Trailblazer::Operation
 
   fail :add_errors
 
-  def find_project(ctx, params:, **)
+  def find_project(_ctx, params:, **)
     project = Project.find_by(name: params[:name])
 
     project.nil?
   end
+
   def initialize_project(ctx, current_user:, params:, **)
     ctx[:project] = Project.new(name: params[:name], user_id: current_user.id)
   end
