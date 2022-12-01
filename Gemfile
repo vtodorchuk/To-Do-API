@@ -3,20 +3,22 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.10'
 
-gem 'rails', '~> 6.1.7'
-gem 'devise', '~> 4.8', '>= 4.8.1'
+gem 'aws-sdk-s3', require: false
+gem 'bootsnap', '>= 1.4.4', require: false
+gem 'jsonapi-serializer'
 gem 'jwt', '~> 2.2', '>= 2.2.1'
 gem 'jwt_sessions', '~> 2.7', '>= 2.7.4'
+gem 'kaminari'
+gem 'pg', '~> 1.1'
 gem 'pry', '~> 0.13.1'
+gem 'puma', '~> 5.0'
+gem 'rails', '~> 6.1.7'
 gem 'redis', '~> 4.1', '>= 4.1.3'
 gem 'redis-rails', '~> 5.0', '>= 5.0.2'
-gem 'pg', '~> 1.1'
-gem 'puma', '~> 5.0'
-gem 'bootsnap', '>= 1.4.4', require: false
+gem 'trailblazer-rails'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'dox', require: false
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.2'
   gem 'fasterer', '~> 0.10.0'
   gem 'ffaker', '~> 2.21'
@@ -32,10 +34,12 @@ group :development do
 end
 
 group :test do
+  gem 'dox', require: false
   gem 'rspec', '~> 3.12'
   gem 'rspec-rails', '~> 5.1', '>= 5.1.2'
+  gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', '~> 0.21.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
