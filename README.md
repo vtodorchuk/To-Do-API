@@ -1,24 +1,10 @@
-# README
+# To-Do API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is api for To-Do web applications.
+This api implemented projects, tasks and comments.
+You can easy manage tasks, prioritize them and 
 
-Things you may want to cover:
+Documentation
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- [Documentation](https://to-do-api-fj1.herokuapp.com/api/v1/docs/documentation.html)
+- [Access API](https://to-do-api-fj1.herokuapp.com)

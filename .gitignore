@@ -12,11 +12,17 @@ coverage
 /coverage
 coverage/*
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
+log/*
+tmp/*
+storage/*
+
 !/log/.keep
 !/tmp/.keep
-
+log
+public
+storage
+tmp
+vendor
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
 !/tmp/pids/
