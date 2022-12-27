@@ -11,6 +11,16 @@ class Api::V1::CommentsController < ApplicationController
     end
   end
 
+  def show
+    result = V1::Comment::Operation::Show.call(params: params, current_user: current_user)
+
+    if result.success?
+      render json: V1::CommentSerializer.new(result[:comment]), status: :found
+    else
+      render status: :not_found
+    end
+  end
+
   def create
     result = V1::Comment::Operation::Create.call(params: params, comment_params: comment_params,
                                                  current_user: current_user)
@@ -27,16 +37,6 @@ class Api::V1::CommentsController < ApplicationController
 
     if result.success?
       render status: :ok
-    else
-      render status: :not_found
-    end
-  end
-
-  def show
-    result = V1::Comment::Operation::Show.call(params: params, current_user: current_user)
-
-    if result.success?
-      render json: V1::CommentSerializer.new(result[:comment]), status: :found
     else
       render status: :not_found
     end

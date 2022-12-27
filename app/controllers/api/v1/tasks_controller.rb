@@ -11,6 +11,17 @@ class Api::V1::TasksController < ApplicationController
     end
   end
 
+  def show
+    result = V1::Task::Operation::Show.call(project_id: params[:project_id], params: task_params,
+                                            current_user: current_user)
+
+    if result.success?
+      render json: V1::TaskSerializer.new(result[:task]), status: :found
+    else
+      render status: :not_found
+    end
+  end
+
   def create
     result = V1::Task::Operation::Create.call(project_id: params[:project_id], params: task_params,
                                               current_user: current_user)
@@ -19,17 +30,6 @@ class Api::V1::TasksController < ApplicationController
       render json: V1::TaskSerializer.new(result[:task]), status: :created
     else
       render json: { errors: result[:errors] }, status: result[:status]
-    end
-  end
-
-  def destroy
-    result = V1::Task::Operation::Destroy.call(project_id: params[:project_id], params: task_params,
-                                               current_user: current_user)
-
-    if result.success?
-      render status: :ok
-    else
-      render status: :not_found
     end
   end
 
@@ -44,12 +44,12 @@ class Api::V1::TasksController < ApplicationController
     end
   end
 
-  def show
-    result = V1::Task::Operation::Show.call(project_id: params[:project_id], params: task_params,
-                                            current_user: current_user)
+  def destroy
+    result = V1::Task::Operation::Destroy.call(project_id: params[:project_id], params: task_params,
+                                               current_user: current_user)
 
     if result.success?
-      render json: V1::TaskSerializer.new(result[:task]), status: :found
+      render status: :ok
     else
       render status: :not_found
     end
