@@ -1,8 +1,6 @@
 class V1::Project::Operation::Create < Trailblazer::Operation
-  step :find_project,
-       Output(Trailblazer::Activity::Left, :failure) => Path(end_id: 'End.failure', end_task: End(:with_failure)) do
-    step :project_exists
-  end
+  step :find_project
+  fail :project_exists, fail_fast: true
   step :initialize_project
   step :save_project
 
@@ -12,6 +10,10 @@ class V1::Project::Operation::Create < Trailblazer::Operation
     project = Project.find_by(name: params[:name])
 
     project.nil?
+  end
+
+  def project_exists(ctx, **)
+    ctx[:errors] = [I18n.t('errors.project_exist')]
   end
 
   def initialize_project(ctx, current_user:, params:, **)
@@ -24,9 +26,5 @@ class V1::Project::Operation::Create < Trailblazer::Operation
 
   def add_errors(ctx, project:, **)
     ctx[:errors] = project.errors.full_messages
-  end
-
-  def project_exists(ctx, **)
-    ctx[:errors] = [I18n.t('errors.project_exist')]
   end
 end
