@@ -15,7 +15,7 @@ class Api::V1::CommentsController < ApplicationController
     result = V1::Comment::Operation::Show.call(params: params, current_user: current_user)
 
     if result.success?
-      render json: V1::CommentSerializer.new(result[:comment]), status: :found
+      render json: V1::CommentSerializer.new(result[:model]), status: :found
     else
       render status: :not_found
     end
@@ -26,7 +26,7 @@ class Api::V1::CommentsController < ApplicationController
                                                  current_user: current_user)
 
     if result.success?
-      render json: V1::CommentSerializer.new(result[:comment]), status: :created
+      render json: V1::CommentSerializer.new(result[:model]), status: :created
     else
       render json: { errors: result[:errors] }, status: result[:status]
     end
@@ -46,13 +46,5 @@ class Api::V1::CommentsController < ApplicationController
 
   def comment_params
     params.permit(:body, :image, :page)
-  end
-
-  def task
-    Task.find_by(id: params[:task_id], project_id: params[:project_id])
-  end
-
-  def comment
-    task.comments.find_by(id: params[:id])
   end
 end

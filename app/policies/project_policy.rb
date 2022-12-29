@@ -1,8 +1,9 @@
-class ProjectPolicy < ApplicationPolicy
-  class Scope < Scope
-    def resolve
-      scope.all
-    end
+class ProjectPolicy
+  attr_reader :user, :model
+
+  def initialize(user, model)
+    @user = user
+    @model = model
   end
 
   def index?
@@ -14,7 +15,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def create?
-    false
+    true
   end
 
   def update?

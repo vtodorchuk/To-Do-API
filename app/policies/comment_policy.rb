@@ -1,8 +1,9 @@
-class CommentPolicy < ApplicationPolicy
-  class Scope < Scope
-    def resolve
-      scope.all
-    end
+class CommentPolicy
+  attr_reader :user, :model
+
+  def initialize(user, model)
+    @user = user
+    @model = model
   end
 
   def index?

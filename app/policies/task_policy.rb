@@ -1,8 +1,9 @@
-class TaskPolicy < ApplicationPolicy
-  class Scope < Scope
-    def resolve
-      scope.all
-    end
+class TaskPolicy
+  attr_reader :user, :model
+
+  def initialize(user, model)
+    @user = user
+    @model = model
   end
 
   def index?
@@ -18,7 +19,7 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def update?
-    true
+    !@model.completed?
   end
 
   def destroy?
